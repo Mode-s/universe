@@ -27,12 +27,6 @@ const { titleEN, titleJa } = Astro.props;
     color: $color-text;
   }
 
-  .heading .inner {
-    max-width: $container-width;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
   .heading .title {
     display: flex;
     flex-direction: column;
@@ -40,8 +34,8 @@ const { titleEN, titleJa } = Astro.props;
   }
 
   .heading-ja {
-    font-size: 2rem;
-    letter-spacing: 0.1em;
+    font-size: $font-size-2xl;
+    letter-spacing: $font-size-label;
   }
 
   .heading-en {

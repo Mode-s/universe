@@ -7,14 +7,29 @@ $container-width: 980px;
 $color-primary: #2E424D;
 $color-accent: #D9B96B;
 $color-sub: #A7C4D1;
+
+// Background
 $color-bg: #fafafa;
 $color-bg-alt: #ebebf8;
+
+// テキスト
 $color-text: #2E424D;
 $color-text-light: #D9B96B;
 
-// フォントサイズ
-$font-size-sm: 0.875rem;
-$font-size-base: 1rem;
+// ─── Font Size ─────────────────────────────────────────
+$font-size-xs: 0.75rem;    // 12px - キャプション、コピーライト
+$font-size-sm: 0.875rem;   // 14px - 小さめの補助テキスト
+$font-size-base: 1rem;     // 16px - 本文
+$font-size-lg: 1.25rem;    // 20px - やや大きめのテキスト
+$font-size-xl: 1.5rem;     // 24px - 小見出し
+$font-size-2xl: 2rem;      // 32px - 大見出し
+$font-size-3xl: 2.5rem;    // 40px - ヒーロー見出し
+
+// 特殊用途（一般スケールから外れるもの）
+$font-size-nav-ja: 0.8rem;   // ナビ日本語
+$font-size-nav-en: 0.5rem;   // ナビ英語（かなり小さい装飾的サイズ）
+$font-size-label: 0.7rem;    // 見出しの英語ラベル（装飾的）
+$font-size-scroll: 0.625rem;
 
 // z-index
 $z-base: 1;

@@ -2,15 +2,15 @@
 interface Props {
   tag?: 'h2' | 'h3';
   titleJa: string;
-  titleEN: string;
+  titleEn: string;
 }
 
-const { tag: Tag = 'h2', titleJa, titleEN } = Astro.props;
+const { tag: Tag = 'h2', titleJa, titleEn } = Astro.props;
 ---
 
 <Tag class="title">
   <span class="title-ja">{titleJa}</span>
-  <span class="title-en">{titleEN}</span>
+  <span class="title-en">{titleEn}</span>
 </Tag>
 
 <style lang="scss">
@@ -24,8 +24,8 @@ const { tag: Tag = 'h2', titleJa, titleEN } = Astro.props;
   }
 
   .title-ja {
-    font-size: 1.5rem;
-    letter-spacing: 0.1em;
+    font-size: $font-size-xl;
+    letter-spacing: $font-size-label;
   }
 
   .title-en {

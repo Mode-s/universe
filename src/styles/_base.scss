@@ -1,0 +1,12 @@
+@use 'variables' as *;
+
+// ─── Base ──────────────────────────────────────────────
+// タグ直接のスタイリングは、このファイル内の body のみ許容
+body {
+  background: $color-bg-alt;
+  color: $color-text;
+  font-size: $font-size-base;
+  line-height: 1.7;
+  word-break: auto-phrase; 
+  text-wrap: pretty;
+}

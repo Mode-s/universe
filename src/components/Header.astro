@@ -1,12 +1,6 @@
 ---
 import logoImage from '../assets/images/logo.png';
-
-const navLinks = [
-  { href: '/about', labelJa: '私たちについて',labelEN: 'ABOUT', isAccent: false },
-  { href: '/business', labelJa: '事業内容',labelEN: 'BUSINESS', isAccent: false},
-  { href: '/recruit', labelJa: '採用情報', labelEN: 'RECRUIT', isAccent: false },
-  { href: '/contact', labelJa: 'お問い合わせ', labelEN: 'CONTACT', isAccent: true },
-]
+import { navLinks } from '../data/navLinks';
 ---
 <header class="header">
   <div class="inner">
@@ -16,13 +10,13 @@ const navLinks = [
       </div>
       <span class="text">Universe</span>
     </a>
-    <nav class="navigation">
+    <nav class="navigation" aria-label="グローバルナビゲーション">
       <ul class="list">
         {navLinks.map((link) => (
           <li class="item">
-            <a class:list={['link', { 'link-accent': link.isAccent, 'underline': !link.isAccent }]} href={link.href} data-astro-prefetch>
+            <a class:list={['nav-link', { 'link-accent': link.isAccent, 'underline': !link.isAccent }]} href={link.href} data-astro-prefetch>
               <span class="link-ja">{link.labelJa}</span>
-              <span class="link-en">{link.labelEN}</span>
+              <span class="link-en">{link.labelEn}</span>
             </a>
           </li>
         ))}
@@ -52,8 +46,6 @@ const navLinks = [
 
   .header .inner {
     @include flex-between;
-    max-width: $container-width;
-    margin: 0 auto;
     padding: 8px 30px 8px 25px;
     border-radius: 50px;
     background: transparent;
@@ -98,7 +90,7 @@ const navLinks = [
     }
   }
 
-  .header .link {
+  .header .nav-link {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,22 +99,22 @@ const navLinks = [
     border: 1px solid transparent;
 
     @include sp {
-      font-size: 1.25rem;
+      font-size: $font-size-lg;
     }
   }
 
   .header .link-ja {
-    font-size: 0.8rem;
+    font-size: $font-size-nav-ja;
   }
 
   .header .link-en {
-    font-size: 0.5rem;
+    font-size: $font-size-nav-en;
   }
 
   .header .link-accent {
     padding: 4px 24px;
     border: 1px solid $color-accent;
-    border-radius: 20px;
+    border-radius: 30px;
     background: $color-accent;
     color: $color-text;
     transition: opacity 0.6s;
@@ -141,6 +133,7 @@ const navLinks = [
   }
 
   .hamburger {
+    position: relative;
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -242,14 +235,18 @@ const navLinks = [
 
       hamburger.setAttribute('aria-expanded', String(!isOpen));
       hamburger.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
+
+      document.body.style.overflow = isOpen ? '' : 'hidden';
     });
 
-    navigation.querySelectorAll('.link').forEach((link) => {
+    navigation.querySelectorAll('.nav-link').forEach((link) => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('is-open');
         navigation.classList.remove('is-open');
         hamburger.setAttribute('aria-expanded', 'false');
         hamburger.setAttribute('aria-label', 'メニューを開く');
+
+        document.body.style.overflow = '';
       });
     });
    }

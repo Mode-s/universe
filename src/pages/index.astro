@@ -1,10 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/hero.jpg';
+import aboutImage from '../assets/images/photo14.jpg';
+import { businesses } from '../data/businesses';
 ---
 
 <BaseLayout title="株式会社Universe | TOP" description="株式会社Universeのトップページ">
   <section class="hero" slot="hero">
+    <div class="image">
+      <Image src={heroImage} alt="" widths={[768, 1280, 1920]} sizes="100vw" loading="eager" fetchpriority="high" />
+    </div>
     <div class="inner">
       <h1 class="title" id="heroTitle">選べる人生を、すべての人に。</h1>
     </div>
@@ -16,23 +23,80 @@ import SectionTitle from '../components/SectionTitle.astro';
     </div>
   </section>
   <section class="section about">
+    <div class="bg-text" aria-hidden="true">ABOUT ABOUT</div>
     <div class="inner">
-      <SectionTitle titleJa="私たちについて" titleEN="ABOUT" />
+      <div class="fade-in">
+        <SectionTitle titleJa="私たちについて" titleEn="ABOUT" />
+      </div>
+      <div class="content">
+        <div class="text-area">
+          <p class="lead fade-in">「選べる」を支える、すべての仕事を。</p>
+          <p class="body fade-in">株式会社Universeは、人材・キャリア支援を起点に、コンサルティング・営業代行・広告マーケティングまで、企業と人の可能性を広げる事業を展開しています。</p>
+          <p class="body fade-in">「選べる人生を、すべての人に。」<br />この理念のもと、一人ひとりが自分らしい選択をできる社会の実現を目指します。</p>
+          <a href="/about" class="view-more" data-astro-prefetch>
+            <span class="text">VIEW MORE</span>
+            <span class="line" aria-hidden="true"></span>
+          </a>
+        </div>
+        <figure class="image-area fade-in">
+          <Image src={aboutImage} alt="" widths={[480, 960]} sizes="(max-width: 768px) 100vw, 480px" />
+        </figure>
+      </div>
     </div>
   </section>
   <section class="section business">
-    <div class="inner">
-      <SectionTitle titleJa="事業内容" titleEN="BUSINESS" />
+    <div class="sticky-container">
+      <div class="header">
+        <div class="inner">
+          <div class="fade-in">
+            <SectionTitle titleJa="事業内容" titleEn="BUSINESS" />
+          </div>
+        </div>
+      </div>
+      <div class="list">
+        {businesses.map((business, index) => (
+          <article class="item" data-index={index}>
+            <figure class="image-area">
+              <Image
+                src={business.image}
+                alt=""
+                widths={[768, 1280, 1920]}
+                sizes="100vw"
+              />
+            </figure>
+            <div class="content">
+              <span class="number" aria-hidden="true">{business.number}</span>
+              <div class="text-area">
+                <h3 class="title">
+                  <span class="title-ja">{business.titleJa}</span>
+                  <span class="title-en">{business.titleEn}</span>
+                </h3>
+                <p class="catchphrase">{business.catchphrase}</p>
+                <p class="description">{business.description}</p>
+              </div>
+              <a href={`/business#${business.id}`} class="view-more" data-astro-prefetch>
+                <span class="text">VIEW MORE</span>
+                <span class="line" aria-hidden="true"></span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="indicator" aria-hidden="true">
+        {businesses.map((business, index) => (
+          <span class="dot" data-index={index}></span>
+        ))}
+      </div>
     </div>
   </section>
   <section class="section recruit">
     <div class="inner">
-      <SectionTitle titleJa="採用情報" titleEN="RECRUIT" />
+      <SectionTitle titleJa="採用情報" titleEn="RECRUIT" />
     </div>
   </section>
   <section class="section contact">
     <div class="inner">
-      <SectionTitle titleJa="お問い合わせ" titleEN="CONTACT" />
+      <SectionTitle titleJa="お問い合わせ" titleEn="CONTACT" />
     </div>
   </section>
 </BaseLayout>
@@ -46,16 +110,24 @@ import SectionTitle from '../components/SectionTitle.astro';
     display: flex;
     align-items: center;
     height: 100vh;
-    background: url('/src/assets/images/hero.jpg') center / cover no-repeat;
     color: $color-text-light;
   }
 
-  .hero::after {
+  .hero .image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .hero .image::after {
+    position: absolute;
+    inset: 0;
     background: rgba(0, 0, 0, 0.4);
     content: '';
   }
@@ -66,7 +138,7 @@ import SectionTitle from '../components/SectionTitle.astro';
   }
 
   .hero .title {
-    font-size: 2.5rem;
+    font-size: $font-size-3xl;
     letter-spacing: 0.1em;
     line-height: 1.6;
     opacity: 0;
@@ -81,7 +153,7 @@ import SectionTitle from '../components/SectionTitle.astro';
     }
 
     @include sp {
-      font-size: 1.5rem;
+      font-size: $font-size-xl;
     }
   }
 
@@ -140,7 +212,7 @@ import SectionTitle from '../components/SectionTitle.astro';
   }
 
   .hero .scroll .text {
-    font-size: 0.625rem;
+    font-size: $font-size-scroll;
     letter-spacing: 0.7em;
     writing-mode: vertical-rl;
 
@@ -160,7 +232,396 @@ import SectionTitle from '../components/SectionTitle.astro';
       transform: translateY(0);
     }
   }
-</style>
+
+  // about
+
+  .about {
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+
+    @include sp {
+      padding: 80px 0;
+    }
+  }
+
+  .about .bg-text {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: max-content;
+    font-size: 14rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    color: rgba($color-primary, 0.06);
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    will-change: transform;
+
+    @include sp {
+      bottom: 20px;
+      font-size: 6rem;
+    }
+  }
+
+  .about .content {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 30px;
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+  }
+
+  .about .lead {
+    font-size: $font-size-lg;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+
+    @include sp {
+      font-size: $font-size-base;
+    }
+  }
+
+  .about .body {
+    margin-top: 24px;
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+  }
+
+  .about .view-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 40px;
+    transition: transform 0.3s ease;
+
+    .text {
+      font-size: $font-size-xs;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+    }
+
+    .line {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: $color-text;
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateX(5px);
+
+      .line {
+        width: 60px;
+      }
+    }
+
+    @include reduced-motion {
+      transition: none;
+
+      .line {
+        transition: none;
+      }
+
+      &:hover {
+        transform: none;
+
+        .line {
+           width: 40px;
+        }
+      }
+    }
+  }
+
+  .about .image-area {
+    position: relative;
+
+    img {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      object-fit: cover;
+      z-index: $z-base;
+      will-change: transform;
+
+      @include sp {
+        aspect-ratio: 4/2;
+        height: auto;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      top: 16px;
+      right: -16px;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      background: $color-accent;
+      content: '';
+
+      @include sp {
+        top: 12px;
+        right: -12px;
+      }
+    }
+  }
+
+  .about .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+    &.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @include reduced-motion {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  .about .fade-in:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+
+  .about .fade-in:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .about .fade-in:nth-child(4) {
+    transition-delay: 0.3s;
+  }
+
+// business
+
+.business {
+  position: relative;
+  height: calc(400vh + 240px);
+  background: $color-bg-alt;
+}
+
+.business .sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.business .header {
+  position: relative;
+  z-index: 2;
+  padding: 120px 0 30px;
+  background: linear-gradient(
+    to bottom,
+    $color-bg-alt 0%,
+    $color-bg-alt 70%,
+    rgba($color-bg-alt, 0) 100%
+  );
+}
+
+.business .list {
+  position: relative;
+  height: 100vh;
+  margin-top: 60px;
+  transform-style: preserve-3d;
+}
+
+.business .item {
+  position: absolute;
+  inset: 0;
+  min-height: auto;
+  color: $color-text-light;
+  transform: translateY(100%);
+  opacity: 0;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+.business .item:first-child {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 画像（背景として敷く） */
+.business .image-area {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 暗いオーバーレイ */
+  &::after {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    content: '';
+  }
+}
+
+/* テキストコンテンツ（画像の前面レイヤー） */
+.business .content {
+  position: relative;
+  z-index: $z-base;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+  min-height: 100%;
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 200px 20px 50px;
+}
+
+.business .indicator {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transform: translateY(-50%);
+}
+
+.business .indicator .dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba($color-text-light, 0.3);
+  transition: background 0.3s ease, transform 0.3s ease;
+
+  @include reduced-motion {
+    transition: none;
+  }
+
+  &.is-active {
+    background: $color-accent;
+    transform: scale(1.3);
+  }
+}
+
+.business .number {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  font-size: $font-size-2xl;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: $color-accent;
+}
+
+.business .text-area {
+  grid-column: 1 / 2;
+  align-self: end;
+}
+
+.business .title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.business .title-ja {
+  font-size: $font-size-xl;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.business .title-en {
+  font-size: $font-size-label;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.business .catchphrase {
+  margin-top: 16px;
+  font-size: $font-size-lg;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+}
+
+.business .description {
+  margin-top: 12px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+}
+
+.business .view-more {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  align-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: $color-text-light;
+  transition: transform 0.3s ease;
+
+  .text {
+    font-size: $font-size-xs;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+  }
+
+  .line {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: $color-text-light;
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateX(5px);
+
+    .line {
+      width: 60px;
+    }
+  }
+
+  @include reduced-motion {
+    transition: none;
+
+    .line {
+      transition: none;
+    }
+
+    &:hover {
+      transform: none;
+
+      .line {
+        width: 40px;
+      }
+    }
+  }
+}
+
+
+  </style>
 
 <script>
   const heroTitle = document.getElementById('heroTitle');
@@ -187,4 +648,155 @@ import SectionTitle from '../components/SectionTitle.astro';
       }, 2600);
     });
   }
+
+  const fadeTargets = document.querySelectorAll('.about .fade-in');
+
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.3,
+  });
+
+  fadeTargets.forEach((el) => fadeObserver.observe(el));
+
+  const bgText = document.querySelector('.about .bg-text') as HTMLElement | null;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (bgText && !prefersReducedMotion) {
+    let ticking = false;
+
+    const updateBgText = () => {
+      const scrollY = window.scrollY;
+      bgText.style.transform = `translateY(${-scrollY * 0.7}px)`;
+      ticking = false;
+    };
+  
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateBgText);
+        ticking = true;
+      }
+    });
+    
+    updateBgText();
+  }
+
+  const aboutSection = document.querySelector('.about');
+  const aboutImage = document.querySelector('.about .image-area img') as HTMLElement | null;
+
+  if (aboutSection && aboutImage && !prefersReducedMotion) {
+    let parallaxTicking = false;
+
+    const updateParallax = () => {
+
+      if (window.innerWidth <= 768) {
+        aboutImage.style.transform = '';
+        parallaxTicking = false;
+        return;
+      }
+      const rect = aboutSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (rect.bottom >= 0 && rect.top <= windowHeight) {
+        const sectionCenter = rect.top + rect.height / 2;
+        const windowCenter = windowHeight / 2;
+        const offset = (sectionCenter - windowCenter) * -0.15;
+
+        aboutImage.style.transform = `translateY(${offset}px)`;
+      }
+
+      parallaxTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!parallaxTicking) {
+        requestAnimationFrame(updateParallax);
+        parallaxTicking = true;
+      }
+    });
+
+    updateParallax();
+  }
+
+  /* ─── BUSINESS: スクロールジャック ─── */
+const businessSection = document.querySelector('.business') as HTMLElement | null;
+const businessItems = document.querySelectorAll<HTMLElement>('.business .item');
+
+if (businessSection && businessItems.length > 0 && !prefersReducedMotion) {
+  let businessTicking = false;
+  const dots = document.querySelectorAll<HTMLElement>('.business .indicator .dot');
+
+  const updateBusinessSlides = () => {
+  if (window.innerWidth <= 768) {
+    businessTicking = false;
+    return;
+  }
+
+  const rect = businessSection.getBoundingClientRect();
+  const scrollable = businessSection.offsetHeight - window.innerHeight;
+  const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+
+  businessItems.forEach((item, index) => {
+    const slideProgress = progress * businessItems.length - index;
+
+    let translateY = 0;
+    let translateZ = 0;
+    let opacity = 1;
+
+    if (slideProgress < 0) {
+      // 待機：画面下で待機
+      translateY = 100;
+      translateZ = 0;
+      opacity = 0;
+    } else if (slideProgress < 0.5) {
+      // 登場：下から上がってくる（0〜0.5 の進行度を 0〜1 に正規化）
+      const enterProgress = slideProgress * 2;
+      translateY = (1 - enterProgress) * 100;
+      translateZ = 0;
+      opacity = enterProgress;
+    } else if (slideProgress < 1) {
+      // 退場：奥に引っ込む（0.5〜1 の進行度を 0〜1 に正規化）
+      const exitProgress = (slideProgress - 0.5) * 2;
+      translateY = 0;
+      translateZ = -exitProgress * 400;
+      opacity = 1 - exitProgress;
+    } else {
+      // 退場完了：完全に消える
+      translateY = 0;
+      translateZ = -400;
+      opacity = 0;
+    }
+
+    item.style.transform = `translateY(${translateY}%) translateZ(${translateZ}px)`;
+    item.style.opacity = String(opacity);
+  });
+
+  const activeIndex = Math.min(
+    businessItems.length - 1,
+    Math.floor(progress * businessItems.length)
+  );
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === activeIndex);
+  });
+
+  businessTicking = false;
+};
+
+  window.addEventListener('scroll', () => {
+    if (!businessTicking) {
+      requestAnimationFrame(updateBusinessSlides);
+      businessTicking = true;
+    }
+  });
+
+  // 初回実行
+  updateBusinessSlides();
+  
+}
 </script>
