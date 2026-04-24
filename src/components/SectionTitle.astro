@@ -1,0 +1,46 @@
+---
+interface Props {
+  tag?: 'h2' | 'h3';
+  titleJa: string;
+  titleEN: string;
+}
+
+const { tag: Tag = 'h2', titleJa, titleEN } = Astro.props;
+---
+
+<Tag class="title">
+  <span class="title-ja">{titleJa}</span>
+  <span class="title-en">{titleEN}</span>
+</Tag>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .title-ja {
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .title-en {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+
+    &::before,
+    &::after {
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: $color-text;
+      content: '';
+    }
+  }
+</style>

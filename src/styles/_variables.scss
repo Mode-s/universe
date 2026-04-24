@@ -1,0 +1,26 @@
+// レイアウト
+$breakpoint-tablet: 1024px;
+$breakpoint-sp: 768px;
+$container-width: 980px;
+
+// color
+$color-primary: #2E424D;
+$color-accent: #D9B96B;
+$color-sub: #A7C4D1;
+$color-bg: #fafafa;
+$color-bg-alt: #ebebf8;
+$color-text: #2E424D;
+$color-text-light: #D9B96B;
+
+// フォントサイズ
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+
+// z-index
+$z-base: 1;
+$z-dropdown: 100;
+$z-header: 200;
+$z-modal-overlay: 300;
+$z-modal: 400;
+$z-toast: 500;
+$z-loading: 600;

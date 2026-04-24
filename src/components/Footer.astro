@@ -1,0 +1,141 @@
+---
+import logoImage from '../assets/images/logo2.png';
+
+const navLinks = [
+  { href: '/about', labelEN: 'ABOUT', labelJa: '私たちについて' },
+  { href: '/business', labelEN: 'BUSINESS', labelJa: '事業内容' },
+  { href: '/recruit', labelEN: 'RECRUIT', labelJa: '採用情報' },
+  { href: '/contact', labelEN: 'CONTACT', labelJa: 'お問い合わせ' },
+]
+---
+
+<footer class="footer">
+  <div class="inner">
+    <div class="main">
+      <div class="info">
+        <a href="/" class="logo" data-astro-prefetch>
+          <div class="icon">
+            <img class="image" src={logoImage.src} alt="" width="50" height="50" />
+          </div>
+        </a>
+        <address class="address">
+          株式会社Universe<br />
+          〒530-0012<br />
+          大阪府大阪市北区芝田2-1-18 西阪急ビル
+        </address>
+      </div>
+      <nav class="navigation" aria-label="フッターナビゲーション">
+        <ul class="list">
+          {navLinks.map((link) => (
+            <li class="item">
+              <a href={link.href} class="link underline" data-astro-prefetch>
+                <span class="link-ja">{link.labelJa}</span>
+                <span class="link-en">{link.labelEN}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+    <p class="copyright">
+      <small>&copy; 2026 Universe Inc. All Rights Reserved.</small>
+    </p>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .footer {
+    background: $color-primary;
+    color: $color-text-light;
+    padding: 60px 0 24px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .footer .inner {
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer .main {
+    @include flex-between;
+
+    @include sp {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .footer .navigation {
+    display: flex;
+    gap: 24px;
+
+    @include sp {
+      margin-top: 32px;
+    }
+  }
+
+  .footer .logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer .icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .footer .logo .image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .footer .address {
+    margin-top: 16px;
+    font-size: $font-size-sm;
+    line-height: 1.8;
+    letter-spacing: 0.2em;
+  }
+
+  .footer .list {
+    display: flex;
+    gap: 24px;
+
+    @include sp {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+
+  .footer .link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: $font-size-sm;
+    letter-spacing: 0.2em;
+  }
+
+  .footer .link-ja {
+    font-size: 0.8rem;
+  }
+
+  .footer .link-en {
+    font-size: 0.5rem;
+  }
+
+  .footer .copyright {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+</style>

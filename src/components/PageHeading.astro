@@ -1,0 +1,63 @@
+---
+interface Props {
+  titleJa: string;
+  titleEN: string;
+}
+
+const { titleEN, titleJa } = Astro.props;
+---
+
+<div class="heading">
+  <div class="inner">
+    <h1 class="title">
+      <span class="heading-ja">{titleJa}</span>
+      <span class="heading-en">{titleEN}</span>
+    </h1>
+  </div>
+</div>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .heading {
+    display: flex;
+    align-items: center;
+    padding: 120px 0 0;
+    color: $color-text;
+  }
+
+  .heading .inner {
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .heading .title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .heading-ja {
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+  }
+
+  .heading-en {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.7rem;
+
+    &::before,
+    &::after {
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: $color-text;
+      content: '';
+    }
+  }
+</style>

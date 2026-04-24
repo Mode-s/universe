@@ -1,0 +1,99 @@
+---
+import '../styles/reset.css';
+import '../styles/global.scss';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { 
+  title = 'Universe', 
+  description = 'corporatesite'
+   } = Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+    <meta name="description" content={ description }>
+    <!-- SNS shere OGP -->
+    <meta property="og:title" content={ title } />
+    <meta property="og:description" content={ description } />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content={ Astro.url } />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="" />
+		<title>{ title }</title>
+  </head>
+  <body>
+    <div class="loading" id="loading">
+      <p class="logo">Universe</p>
+    </div>
+    <Header />
+    <slot name="hero" />
+    <main class="content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style lang="scss">
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: $z-loading;
+    transition: opacity 0.6s;
+  }
+
+  .loading.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .loading .logo {
+    color: #fff;
+    font-size: 24px;
+    letter-spacing: 1.5rem;
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: transLateY(0);
+    }
+  }
+</style>
+
+<script is:inline>
+  const loading = document.getElementById('loading');
+
+  if (sessionStorage.getItem('loaded')) {
+    loading?.remove();
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loading?.classList.add('is-hidden');
+        sessionStorage.setItem('loaded', 'true');
+      }, 2000);
+    });
+  }
+</script>
