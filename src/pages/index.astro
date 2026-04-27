@@ -47,7 +47,6 @@ import contactImage from '../assets/images/photo14.jpg';
     </div>
   </section>
   <section class="section business">
-    <div class="sticky-container">
       <div class="header">
         <div class="inner">
           <div class="fade-in">
@@ -84,12 +83,6 @@ import contactImage from '../assets/images/photo14.jpg';
           </article>
         ))}
       </div>
-      <div class="indicator" aria-hidden="true">
-        {businesses.map((business, index) => (
-          <span class="dot" data-index={index}></span>
-        ))}
-      </div>
-    </div>
   </section>
   <section class="section recruit">
     <figure class="image">
@@ -101,7 +94,7 @@ import contactImage from '../assets/images/photo14.jpg';
       </div>
       <p class="lead fade-in">成長する自分に出会える場所。</p>
       <p class="body fade-in">未経験からでも、独自の育成カリキュラムとメンター制度で着実にステップアップア。<br />「自分で考えて動ける人材」へ——あなたの挑戦を、全力で支えます。</p>
-      <a href="/recruit" class="view-more fade-in" data-astro^preftch>
+      <a href="/recruit" class="view-more fade-in" data-astro-preftch>
         <span class="text">VIEW MORE</span>
         <span class="line" aria-hidden="true"></span>
       </a>
@@ -116,7 +109,7 @@ import contactImage from '../assets/images/photo14.jpg';
         <SectionTitle titleJa="お問い合わせ" titleEn="CONTACT" />
       </div>
       <p class="lead fade-in">ご質問・ご相談はお気軽にどうぞ。</p>
-      <a href="/contact" class="button fade-in" data-astro-preftch>お問い合わせはこちら</a>
+      <a href="/contact" class="button fade-in" data-astro-prefetch>お問い合わせはこちら</a>
     </div>
   </section>
 </BaseLayout>
@@ -414,76 +407,33 @@ import contactImage from '../assets/images/photo14.jpg';
 
 // business
 
+// business
+
 .business {
   position: relative;
-  height: 100vh;
   background: $color-bg-alt;
 }
 
-.business .sticky-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-}
-
 .business .header {
-  position: relative;
-  z-index: 2;
-  flex-shrink: 0;
   padding: 80px 0 20px;
-  background: linear-gradient(
-    to bottom,
-    $color-bg-alt 0%,
-    $color-bg-alt 70%,
-    rgba($color-bg-alt, 0) 100%
-  );
+
+  @include sp {
+    padding: 60px 0 20px;
+  }
 }
 
 .business .list {
-  position: relative;
-  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .business .item {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  height: 480px;
   color: #fff;
-  cursor: pointer;
 
-  /* デフォルト：画面下で待機 */
-  transform: translateY(100%);
-  opacity: 0;
-  z-index: 0;
-
-  /* 現在表示中 */
-  &.is-active {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-    z-index: 2;
-  }
-
-  /* 退場済み（奥に引っ込んだ） */
-  &.is-above {
-    transform: translateY(0) scale(0.85);
-    opacity: 0;
-    z-index: 1;
-  }
-
-  /* 画面下で待機中 */
-  &.is-below {
-    transform: translateY(100%);
-    opacity: 0;
-    z-index: 0;
-  }
-
-  /* アニメーション有効時のみ transition を付ける */
-  &.is-animated {
-    transition: transform 0.8s ease, opacity 0.8s ease;
-  }
-
-  @include reduced-motion {
-    transition: none !important;
+  @include sp {
+    height: 400px;
   }
 }
 
@@ -520,6 +470,10 @@ import contactImage from '../assets/images/photo14.jpg';
   max-width: $container-width;
   margin: 0 auto;
   padding: 20px 20px;
+
+  @include sp {
+    padding: 24px 20px;
+  }
 }
 
 .business .number {
@@ -531,6 +485,10 @@ import contactImage from '../assets/images/photo14.jpg';
   letter-spacing: 0.1em;
   color: $color-accent;
   line-height: 1;
+
+  @include sp {
+    top: 20px;
+  }
 }
 
 .business .text-area {
@@ -614,35 +572,6 @@ import contactImage from '../assets/images/photo14.jpg';
         width: 40px;
       }
     }
-  }
-}
-
-.business .indicator {
-  position: absolute;
-  top: 50%;
-  right: 40px;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transform: translateY(-50%);
-}
-
-.business .indicator .dot {
-  display: block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transition: background 0.3s ease, transform 0.3s ease;
-
-  @include reduced-motion {
-    transition: none;
-  }
-
-  &.is-active {
-    background: $color-accent;
-    transform: scale(1.3);
   }
 }
 
@@ -841,6 +770,8 @@ import contactImage from '../assets/images/photo14.jpg';
 </style>
 
 <script>
+import { actions } from "astro:actions";
+
   const heroTitle = document.getElementById('heroTitle');
 
   const triggerAnimation = () => {
@@ -866,7 +797,7 @@ import contactImage from '../assets/images/photo14.jpg';
     });
   }
 
-  const fadeTargets = document.querySelectorAll('.about .fade-in, .recruit .fade-in, .contact .fade-in');
+  const fadeTargets = document.querySelectorAll('.fade-in');
 
   const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -940,192 +871,4 @@ import contactImage from '../assets/images/photo14.jpg';
 
     updateParallax();
   }
-
-/* ─── BUSINESS: スナップスクロール ─── */
-const businessSection = document.querySelector('.business') as HTMLElement | null;
-const businessItems = document.querySelectorAll<HTMLElement>('.business .item');
-
-if (businessSection && businessItems.length > 0 && !prefersReducedMotion && window.innerWidth > 768) {
-  const dots = document.querySelectorAll<HTMLElement>('.business .indicator .dot');
-  const totalSlides = businessItems.length;
-  let currentSlide = 0;
-  let isAnimating = false;
-  let isCaptured = false;
-  let cooldownActive = false;
-  const ANIMATION_DURATION = 800;
-  const COOLDOWN_DURATION = 1200;
-  const CAPTURE_DELAY = 300;
-  const HEADER_SCROLL_OFFSET = 80;
-  const EXTRA_SCROLL_DOWN = 40;
-  // プログラムで scrollTo 中は scroll 方向の記録や IO を汚染しない
-  let isProgrammaticScroll = false;
-  // 整列〜capture の二重実行防止
-  let isAligning = false;
-    // 直近のスクロール方向（止まったあとでもオブザーバーで正しく使う）
-  let prevScrollY = window.scrollY;
-  let lastScrollWasDown = true; // 未スクロール時は「上から下へ」とみなす
-
-  window.addEventListener('scroll', () => {
-    if (isProgrammaticScroll) return;
-
-    const y = window.scrollY;
-    if (y > prevScrollY) {
-      lastScrollWasDown = true;
-    } else if (y < prevScrollY) {
-      lastScrollWasDown = false;
-    }
-    prevScrollY = y;
-  }, { passive: true });
-
-  /* スライドの状態を更新（アニメーションあり/なし選択可能） */
-  const updateSlides = (animate: boolean) => {
-    businessItems.forEach((item, i) => {
-      // アニメーションフラグの制御
-      if (animate) {
-        item.classList.add('is-animated');
-      } else {
-        item.classList.remove('is-animated');
-      }
-
-      // 状態クラスの更新
-      item.classList.remove('is-active', 'is-above', 'is-below');
-      if (i < currentSlide) {
-        item.classList.add('is-above');
-      } else if (i === currentSlide) {
-        item.classList.add('is-active');
-      } else {
-        item.classList.add('is-below');
-      }
-    });
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === currentSlide);
-    });
-  };
-
-  /* 初期表示（アニメーションなし） */
-  updateSlides(false);
-
-  /* カード全体のクリックで遷移 */
-  businessItems.forEach((item) => {
-    const link = item.querySelector('.view-more') as HTMLAnchorElement | null;
-    if (link) {
-      item.addEventListener('click', (e) => {
-        if ((e.target as HTMLElement).closest('.view-more')) return;
-        window.location.href = link.href;
-      });
-    }
-  });
-
-    /* キャプチャ時に揃えるスクロール位置（マウス／キー共通） */
-    const getSnapScrollY = (fromBottom: boolean) => {
-    const rect = businessSection.getBoundingClientRect();
-    const topAbs = window.scrollY + rect.top;
-
-    if (fromBottom) {
-      return Math.max(
-        0,
-        Math.round(topAbs + businessSection.offsetHeight - window.innerHeight),
-      );
-    }
-
-    return Math.max(
-      0,
-      Math.round(topAbs - HEADER_SCROLL_OFFSET + EXTRA_SCROLL_DOWN),
-    );
-  };
-
-  /* 位置を揃えてからキャプチャ */
-  const alignScrollThenCapture = (fromBottom: boolean) => {
-    if (isCaptured || cooldownActive || isAnimating || isAligning) return;
-    isAligning = true;
-    isProgrammaticScroll = true;
-
-    window.scrollTo({
-      top: getSnapScrollY(fromBottom),
-      left: 0,
-      behavior: 'auto',
-    });
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        isProgrammaticScroll = false;
-        isAligning = false;
-        capture(fromBottom);
-      });
-    });
-  };
-
-
-  /* セクションをキャプチャ */
-  const capture = (fromBottom: boolean) => {
-    if (isCaptured || cooldownActive) return;
-    isCaptured = true;
-
-    // まず位置をスナップ
-    document.body.style.overflow = 'hidden';
-
-    // 初期スライドをアニメーションなしで配置
-    currentSlide = fromBottom ? totalSlides - 1 : 0;
-    updateSlides(false);
-
-    // 少し待ってからアニメーションを有効化（最初のカードを見せる時間）
-    isAnimating = true;
-    setTimeout(() => {
-      isAnimating = false;
-    }, CAPTURE_DELAY);
-  };
-
-  /* セクションを解放 */
-  const release = (direction: 'up' | 'down') => {
-    if (!isCaptured) return;
-    isCaptured = false;
-    cooldownActive = true;
-    document.body.style.overflow = '';
-
-    setTimeout(() => {
-      cooldownActive = false;
-    }, COOLDOWN_DURATION);
-  };
-
-  /* IntersectionObserver でセクション検知 */
-  const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting || isCaptured || cooldownActive || isAnimating || isAligning) return;
-
-    capture(!lastScrollWasDown);
-  });
-}, {
-  threshold: [0.95],
-});
-
-observer.observe(businessSection);
-
-  /* ホイール操作でスライド切替 */
-  window.addEventListener('wheel', (e) => {
-    if (!isCaptured) return;
-    e.preventDefault();
-    if (isAnimating) return;
-
-    if (e.deltaY > 0) {
-      if (currentSlide < totalSlides - 1) {
-        isAnimating = true;
-        currentSlide++;
-        updateSlides(true);  // アニメーション付き
-        setTimeout(() => { isAnimating = false; }, ANIMATION_DURATION);
-      } else {
-        release('down');
-      }
-    } else if (e.deltaY < 0) {
-      if (currentSlide > 0) {
-        isAnimating = true;
-        currentSlide--;
-        updateSlides(true);  // アニメーション付き
-        setTimeout(() => { isAnimating = false; }, ANIMATION_DURATION);
-      } else {
-        release('up');
-      }
-    }
-  }, { passive: false });
-}
 </script>
