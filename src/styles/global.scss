@@ -40,3 +40,23 @@
       background-size: 100% 1px;
     }
   }
+
+  // ─── Fade In ───────────────────────────────────────────
+// スクロールで要素が現れるアニメーション
+// .is-visible が付くと表示状態になる
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include reduced-motion {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -5,6 +5,8 @@ import { Image } from 'astro:assets';
 import heroImage from '../assets/images/hero.jpg';
 import aboutImage from '../assets/images/photo14.jpg';
 import { businesses } from '../data/businesses';
+import recruitImage from '../assets/images/photo14.jpg';
+import contactImage from '../assets/images/photo14.jpg';
 ---
 
 <BaseLayout title="株式会社Universe | TOP" description="株式会社Universeのトップページ">
@@ -90,13 +92,31 @@ import { businesses } from '../data/businesses';
     </div>
   </section>
   <section class="section recruit">
+    <figure class="image">
+      <Image src={recruitImage} alt="" widths={[768, 1280, 1920]} sizes="100vw" loading="lazy" />
+    </figure>
     <div class="inner">
-      <SectionTitle titleJa="採用情報" titleEn="RECRUIT" />
+      <div class="fade-in">
+        <SectionTitle titleJa="採用情報" titleEn="RECRUIT" />
+      </div>
+      <p class="lead fade-in">成長する自分に出会える場所。</p>
+      <p class="body fade-in">未経験からでも、独自の育成カリキュラムとメンター制度で着実にステップアップア。<br />「自分で考えて動ける人材」へ——あなたの挑戦を、全力で支えます。</p>
+      <a href="/recruit" class="view-more fade-in" data-astro^preftch>
+        <span class="text">VIEW MORE</span>
+        <span class="line" aria-hidden="true"></span>
+      </a>
     </div>
   </section>
   <section class="section contact">
+    <figure class="image">
+      <Image src={contactImage} alt="" widths={[768, 1280, 1920]} sizes="100vw" loading="lazy" />
+    </figure>
     <div class="inner">
-      <SectionTitle titleJa="お問い合わせ" titleEn="CONTACT" />
+      <div class="fade-in">
+        <SectionTitle titleJa="お問い合わせ" titleEn="CONTACT" />
+      </div>
+      <p class="lead fade-in">ご質問・ご相談はお気軽にどうぞ。</p>
+      <a href="/contact" class="button fade-in" data-astro-preftch>お問い合わせはこちら</a>
     </div>
   </section>
 </BaseLayout>
@@ -378,23 +398,6 @@ import { businesses } from '../data/businesses';
     }
   }
 
-  .about .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-
-    &.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @include reduced-motion {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
-
   .about .fade-in:nth-child(2) {
     transition-delay: 0.1s;
   }
@@ -643,8 +646,199 @@ import { businesses } from '../data/businesses';
   }
 }
 
+// recruit
 
-  </style>
+.recruit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 120px 0;
+  color: $color-text-light;
+  overflow: hidden;
+
+  @include sp {
+    padding: 80px 0;
+  }
+}
+
+.recruit .image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    content: '';
+  }
+}
+
+.recruit .inner {
+  position: relative;
+  z-index: $z-base;
+}
+
+.recruit .lead {
+  margin-top: 24px;
+  font-size: $font-size-lg;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+
+  @include sp {
+    font-size: $font-size-base;
+  }
+}
+
+.recruit .body {
+  margin-top: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.recruit .view-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  color: $color-accent;
+  transition: transform 0.3s ease;
+
+  .text {
+    font-size: $font-size-xs;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+  }
+
+  .line {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: $color-accent;
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateX(5px);
+
+    .line {
+      width: 60px;
+    }
+  }
+
+  @include reduced-motion {
+    transition: none;
+
+    .line {
+      transition: none;
+    }
+
+    &:hover {
+      transform: none;
+
+      .line {
+        width: 40px;
+      }
+    }
+  }
+}
+
+.recruit .fade-in:nth-child(2) { transition-delay: 0.1s; }
+.recruit .fade-in:nth-child(3) { transition-delay: 0.2s; }
+.recruit .fade-in:nth-child(4) { transition-delay: 0.3s; }
+
+//  contact
+
+
+.contact {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 60vh;
+  padding: 120px 0;
+  color: $color-text-light;
+  overflow: hidden;
+
+  @include sp {
+    padding: 80px 0;
+  }
+}
+
+.contact .image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    content: '';
+  }
+}
+
+.contact .inner {
+  position: relative;
+  z-index: $z-base;
+}
+
+.contact .lead {
+  margin-top: 24px;
+  font-size: $font-size-base;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.contact .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 16px 48px;
+  border: 1px solid $color-accent;border-radius: 50px;
+  color: $color-accent;
+  font-size: $font-size-sm;
+  letter-spacing: 0.2em;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background: $color-accent;
+    color: $color-text;
+  }
+
+  @include reduced-motion {
+    transition: none;
+  }
+
+  @include sp {
+    padding: 14px 36px;
+  }
+}
+
+.contact .fade-in:nth-child(2) { transition-delay: 0.1s; }
+.contact .fade-in:nth-child(3) { transition-delay: 0.2s; }
+
+
+</style>
 
 <script>
   const heroTitle = document.getElementById('heroTitle');
@@ -672,7 +866,7 @@ import { businesses } from '../data/businesses';
     });
   }
 
-  const fadeTargets = document.querySelectorAll('.about .fade-in');
+  const fadeTargets = document.querySelectorAll('.about .fade-in, .recruit .fade-in, .contact .fade-in');
 
   const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
