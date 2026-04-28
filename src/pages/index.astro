@@ -47,6 +47,7 @@ import contactImage from '../assets/images/photo14.jpg';
     </div>
   </section>
   <section class="section business">
+    <div class="bg-text" aria-hidden="true">BUSINESS</div>
     <div class="inner">
       <div class="fade-in">
         <SectionTitle titleJa="事業内容" titleEn="BUSINESS" />
@@ -90,6 +91,7 @@ import contactImage from '../assets/images/photo14.jpg';
     </div>
   </section>
   <section class="section recruit">
+    <div class="bg-text" aria-hidden="true">RECRUIT</div>
     <div class="inner">
       <div class="fade-in">
         <SectionTitle titleJa="採用情報" titleEn="RECRUIT" />
@@ -111,6 +113,7 @@ import contactImage from '../assets/images/photo14.jpg';
   </section>
   
   <section class="section contact">
+    <div class="bg-text" aria-hidden="true">CONTACT</div>
     <div class="inner">
       <div class="fade-in">
         <SectionTitle titleJa="お問い合わせ" titleEn="CONTACT" />
@@ -269,7 +272,7 @@ import contactImage from '../assets/images/photo14.jpg';
     }
   }
 
-  .about .bg-text {
+  .bg-text {
     position: absolute;
     bottom: 40px;
     left: 0;
@@ -419,8 +422,10 @@ import contactImage from '../assets/images/photo14.jpg';
 
 
 .business {
+  position: relative;
   padding: 80px 0 120px;
   background: $color-bg-alt;
+  overflow: hidden; 
 
   @include sp {
     padding: 60px 0 80px;
@@ -644,11 +649,15 @@ import contactImage from '../assets/images/photo14.jpg';
 
 // recruit
 
-// recruit
-
 .recruit {
+  position: relative;
   padding: 100px 0 120px;
   background: #0c0c0c;
+  overflow: hidden; 
+
+  .bg-text {
+    color: rgba(255, 255, 255, 0.04);  // ダーク背景用に上書き
+  }
 
   @include sp {
     padding: 60px 0 80px;
@@ -768,8 +777,10 @@ import contactImage from '../assets/images/photo14.jpg';
 // contact
 
 .contact {
+  position: relative;
   padding: 100px 0 120px;
   background: #fafaf8;
+  overflow: hidden;
 
   @include sp {
     padding: 60px 0 80px;
@@ -868,27 +879,33 @@ import contactImage from '../assets/images/photo14.jpg';
 
   fadeTargets.forEach((el) => fadeObserver.observe(el));
 
-  const bgText = document.querySelector('.about .bg-text') as HTMLElement | null;
+  const bgTexts = document.querySelectorAll<HTMLElement>('.bg-text');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (bgText && !prefersReducedMotion) {
-    let ticking = false;
+  if (bgTexts && !prefersReducedMotion) {
+    let bgTicking = false;
 
-    const updateBgText = () => {
-      const scrollY = window.scrollY;
-      bgText.style.transform = `translateY(${-scrollY * 0.7}px)`;
-      ticking = false;
-    };
-  
+    const updateBgTexts = () => {
+    bgTexts.forEach((bgText) => {
+      const section = bgText.closest('section') as HTMLElement | null;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (rect.bottom < 0 || rect.top > windowHeight) return;
+      const offset = (rect.top + rect.height / 2 - windowHeight / 2) * 1.5;
+      bgText.style.transform = `translateY(${offset}px)`;
+    });
+    bgTicking = false;
+  };
 
     window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(updateBgText);
-        ticking = true;
+      if (!bgTicking) {
+        requestAnimationFrame(updateBgTexts);
+        bgTicking = true;
       }
     });
     
-    updateBgText();
+    updateBgTexts();
   }
 
   const aboutSection = document.querySelector('.about');
