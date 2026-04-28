@@ -5,30 +5,19 @@ import { Image } from 'astro:assets';
 import { businesses } from '../data/businesses';
 ---
 
-<BaseLayout
-  title="事業内容 | 株式会社Universe"
-  description="株式会社Universeの事業内容をご紹介します。営業代行・コンサルティング・広告マーケティング・人材育成の4事業を展開しています。"
->
+<BaseLayout title="事業内容 | 株式会社Universe" description="株式会社Universeの事業内容をご紹介します。営業代行・コンサルティング・広告マーケティング・人材育成の4事業を展開しています。">
   <section class="business-page">
     <div class="inner">
-
       <div class="business-header fade-in">
         <SectionTitle titleJa="事業内容" titleEn="BUSINESS" />
       </div>
-
       <div class="business-layout">
-
         <!-- 左ナビ -->
         <nav class="business-nav" aria-label="事業一覧">
           <ul class="business-nav-list">
             {businesses.map((business, index) => (
               <li class="business-nav-item">
-                <button
-                  class:list={['business-nav-btn', { 'is-active': index === 0 }]}
-                  data-index={index}
-                  type="button"
-                  aria-selected={index === 0 ? 'true' : 'false'}
-                >
+                <button class:list={['business-nav-btn', { 'is-active': index === 0 }]} data-index={index} type="button" aria-selected={index === 0 ? 'true' : 'false'} >
                   <span class="business-nav-num">{business.number}</span>
                   <span class="business-nav-ja">{business.titleJa}</span>
                 </button>
@@ -40,20 +29,9 @@ import { businesses } from '../data/businesses';
         <!-- 右コンテンツ -->
         <div class="business-contents">
           {businesses.map((business, index) => (
-            <article
-              class:list={['business-content', { 'is-active': index === 0 }]}
-              data-index={index}
-              id={business.id}
-              aria-hidden={index !== 0 ? 'true' : 'false'}
-            >
+            <article class:list={['business-content', { 'is-active': index === 0 }]} data-index={index} id={business.id} aria-hidden={index !== 0 ? 'true' : 'false'} >
               <figure class="business-content-image">
-                <Image
-                  src={business.image}
-                  alt={business.titleJa}
-                  widths={[640, 960, 1280]}
-                  sizes="(max-width: 768px) 100vw, 60vw"
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                />
+                <Image src={business.image} alt={business.titleJa} widths={[640, 960, 1280]} sizes="(max-width: 768px) 100vw, 60vw" loading={index === 0 ? 'eager' : 'lazy'} />
               </figure>
               <div class="business-content-body">
                 <span class="business-content-num">{business.number}</span>
@@ -68,7 +46,6 @@ import { businesses } from '../data/businesses';
             </article>
           ))}
         </div>
-
       </div>
     </div>
   </section>

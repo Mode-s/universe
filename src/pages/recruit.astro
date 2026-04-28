@@ -47,12 +47,8 @@ const steps = [
 ];
 ---
 
-<BaseLayout
-  title="採用情報 | 株式会社Universe"
-  description="株式会社Universeの採用情報ページです。未経験歓迎・成長環境・メンター制度など、Universeで働く魅力をご紹介します。"
->
+<BaseLayout title="採用情報 | 株式会社Universe" description="株式会社Universeの採用情報ページです。未経験歓迎・成長環境・メンター制度など、Universeで働く魅力をご紹介します。">
   <section class="recruit-page">
-
     <!-- ページヘッダー -->
     <div class="recruit-header inner">
       <div class="fade-in">
@@ -66,18 +62,10 @@ const steps = [
         あなたの「やりたい」を、ここで形にしてください。
       </p>
     </div>
-
     <!-- 画像 -->
     <figure class="recruit-hero-image fade-in">
-      <Image
-        src={recruitImage}
-        alt=""
-        widths={[768, 1280, 1920]}
-        sizes="100vw"
-        loading="eager"
-      />
+      <Image src={recruitImage} alt="" widths={[768, 1280, 1920]} sizes="100vw" loading="eager" />
     </figure>
-
     <!-- 魅力セクション -->
     <section class="appeal-section">
       <div class="inner">
@@ -97,7 +85,6 @@ const steps = [
         </ul>
       </div>
     </section>
-
     <!-- 募集要項 -->
     <section class="requirements-section">
       <div class="inner">
@@ -121,8 +108,6 @@ const steps = [
         </dl>
       </div>
     </section>
-
-    <!-- 応募の流れ -->
     <section class="flow-section">
       <div class="inner">
         <div class="fade-in">
@@ -146,7 +131,6 @@ const steps = [
         </ol>
       </div>
     </section>
-
     <!-- CTA -->
     <section class="recruit-cta-section">
       <div class="inner">
@@ -162,7 +146,6 @@ const steps = [
         </div>
       </div>
     </section>
-
   </section>
 </BaseLayout>
 

@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { Image } from 'astro:assets';
 
-// 写真が揃ったら各自の画像に差し替えてください
 import memberYAMANAKA from '../assets/images/YAMANAKA.png';
 import menberAYATO from '../assets/images/AYATO.png';
 import memberAKANE from '../assets/images/AKANE.png';
@@ -78,31 +77,28 @@ const companyInfo = [
       </p>
     </div>
   </section>
-
-<!-- MISSION -->
-<section class="mission-section">
-  <div class="inner">
-    <p class="philosophy-en fade-in">MISSION</p>
-    <p class="philosophy-lead fade-in">{mission.lead}</p>
-    {mission.body.map((text) => (
+  <!-- MISSION -->
+  <section class="mission-section">
+    <div class="inner">
+      <p class="philosophy-en fade-in">MISSION</p>
+      <p class="philosophy-lead fade-in">{mission.lead}</p>
+      {mission.body.map((text) => (
       <p class="philosophy-text fade-in">{text}</p>
-    ))}
-  </div>
-  <p class="philosophy-bg-text" aria-hidden="true">MISSION</p>
-</section>
-
-<!-- VISION -->
-<section class="vision-section">
-  <div class="inner">
-    <p class="philosophy-en fade-in">VISION</p>
-    <p class="philosophy-lead fade-in">{vision.lead}</p>
-    {vision.body.map((text) => (
-      <p class="philosophy-text fade-in">{text}</p>
-    ))}
-  </div>
-  <p class="philosophy-bg-text" aria-hidden="true">VISION</p>
-</section>
-
+      ))}
+    </div>
+    <p class="philosophy-bg-text" aria-hidden="true">MISSION</p>
+  </section>
+  <!-- VISION -->
+  <section class="vision-section">
+    <div class="inner">
+      <p class="philosophy-en fade-in">VISION</p>
+      <p class="philosophy-lead fade-in">{vision.lead}</p>
+      {vision.body.map((text) => (
+        <p class="philosophy-text fade-in">{text}</p>
+      ))}
+    </div>
+    <p class="philosophy-bg-text" aria-hidden="true">VISION</p>
+  </section>
   <!-- 代表メッセージ -->
   <section class="message-section">
     <div class="inner">
@@ -111,13 +107,7 @@ const companyInfo = [
       </div>
       <div class="message-content fade-in">
         <figure class="message-image">
-          <Image
-            src={memberYAMANAKA}
-            alt="代表取締役 山中美樹"
-            widths={[320, 640]}
-            sizes="(max-width: 768px) 100vw, 320px"
-            loading="lazy"
-          />
+          <Image src={memberYAMANAKA} alt="代表取締役 山中美樹" widths={[320, 640]} sizes="(max-width: 768px) 100vw, 320px" loading="lazy" />
         </figure>
         <div class="message-body">
           <p class="message-name-en">Representative Director</p>
@@ -133,7 +123,6 @@ const companyInfo = [
       </div>
     </div>
   </section>
-
   <!-- メンバー紹介 -->
   <section class="member-section">
     <div class="inner">
@@ -144,13 +133,7 @@ const companyInfo = [
         {members.map((member, i) => (
           <li class="member-card fade-in" style={`--delay: ${i * 0.1}s`}>
             <figure class="member-image">
-              <Image
-                src={member.image}
-                alt={member.name}
-                widths={[320, 640]}
-                sizes="(max-width: 768px) 100vw, 320px"
-                loading="lazy"
-              />
+              <Image src={member.image} alt={member.name} widths={[320, 640]} sizes="(max-width: 768px) 100vw, 320px" loading="lazy" />
             </figure>
             <div class="member-body">
               <span class="member-role">{member.role}</span>
@@ -164,7 +147,6 @@ const companyInfo = [
       </ul>
     </div>
   </section>
-
   <!-- 会社概要 -->
   <section class="company-section">
     <div class="inner">
