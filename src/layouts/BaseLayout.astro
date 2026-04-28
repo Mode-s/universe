@@ -8,7 +8,8 @@ import Footer from '../components/Footer.astro';
 
 const { 
   title = 'Universe', 
-  description = 'corporatesite'
+  description = 'corporatesite',
+  headerTheme = 'dark',
    } = Astro.props;
 ---
 
@@ -33,7 +34,7 @@ const {
     <div class="loading" id="loading">
       <p class="logo">Universe</p>
     </div>
-    <Header />
+    <Header theme={headerTheme} />
     <slot name="hero" />
     <main class="content">
       <slot />

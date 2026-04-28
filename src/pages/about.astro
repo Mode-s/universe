@@ -1,9 +1,603 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeading from '../components/PageHeading.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { Image } from 'astro:assets';
+
+// 写真が揃ったら各自の画像に差し替えてください
+import memberYAMANAKA from '../assets/images/YAMANAKA.png';
+import menberAYATO from '../assets/images/AYATO.png';
+import memberAKANE from '../assets/images/AKANE.png';
+
+const mission = {
+  en: 'MISSION',
+  ja: 'ミッション',
+  lead: '自分の力で人生を選べる人を、増やし続ける。',
+  body: [
+    '「選べる」という言葉には、力がある。自分の意志で仕事を選び、生き方を選び、未来を選ぶ。そんな当たり前のようで、多くの人にとって遠い現実を、私たちは変えていきたいと思っています。',
+    'Universeは、営業支援・人材育成・マーケティングを通じて、個人が「選択できる力」を身につける場所をつくります。未経験でも挑戦できる環境、実践で磨かれるスキル、成果が正当に評価される仕組み。一人ひとりが自分の力で道を切り拓けるよう、私たちはその土台をつくり続けます。',
+  ],
+};
+
+const vision = {
+  en: 'VISION',
+  ja: 'ビジョン',
+  lead: '日本にとどまらず、世界で通用する人材が育つ社会へ。',
+  body: [
+    '世界は広い。日本の外に出れば、もっと多くの選択肢がある。言語の壁、文化の違い、商慣習のギャップ——そのすべてを乗り越えた先に、本当の「選択の自由」がある。',
+    '私たちが目指すのは、国境を越えて活躍できる人材が育つ組織。日本国内にとどまらず、世界のどのフィールドでも通用するビジネス力と人間力を持った人材を輩出すること。Universeという名のとおり、その可能性に限界はない。',
+  ],
+};
+
+const members = [
+  {
+    name: '山中 美樹',
+    nameEn: 'Miki Yamanaka',
+    role: '代表取締役',
+    comment: '大学卒業後、海外でのビジネス経験を経て営業・人材育成の分野へ。「自分の力で人生を選べる人を増やす」ことを理念に、日々挑戦し続けています。',
+    image: memberYAMANAKA,
+  },
+  {
+    name: 'アヤト',
+    nameEn: 'Ayato',
+    role: 'MEMBER',
+    comment: '教師・施工管理を経て入社。やりたいことをやりたいときにできる生活を求めて挑戦し、今はそれに繋がっていると感じて楽しく働いています！',
+    image: menberAYATO,
+  },
+  {
+    name: 'アカネ',
+    nameEn: 'Akane',
+    role: 'MEMBER',
+    comment: '飲食・海外経験を経て入社。環境や過去にとらわれず、自分の選択で人生を変えられると実感。「この人に任せてよかった」と思ってもらえる存在を目指しています。',
+    image: memberAKANE,
+  },
+];
+
+const companyInfo = [
+  { label: '会社名', value: '株式会社Universe' },
+  { label: '代表者', value: '山中 美樹' },
+  { label: '設立', value: '2026年1月16日' },
+  { label: '所在地', value: '大阪府大阪市北区芝田2-1-18 西阪急ビル' },
+  { label: '事業内容', value: '営業代行事業 / コンサルティング事業 / 広告マーケティング事業' },
+];
 ---
 
-<BaseLayout title="株式会社Universe | ABOUT" description="ページ説明">
-  <PageHeading titleEN="ABOUT" titleJa="Universeについて" slot="hero" />
+<BaseLayout title="株式会社Universe | ABOUT" description="株式会社Universeの企業理念・代表メッセージ・メンバー紹介・会社概要をご紹介します。">
+  <section class="about-header">
+    <div class="inner">
+      <div class="fade-in">
+        <SectionTitle titleJa="私たちについて" titleEn="ABOUT" />
+      </div>
+      <p class="about-header-sub fade-in">
+        株式会社Universeは、2026年に設立された<br class="br-pc" />
+        営業支援・人材育成を主軸とする会社です。
+      </p>
+      <p class="about-header-lead fade-in">
+        「自分の力で人生を選べる人を増やす」ことを理念に掲げ、<br class="br-pc" />
+        未経験からでも挑戦できる環境の中で、<br class="br-pc" />
+        実践を通じて成長できるフィールドを提供しています。
+      </p>
+    </div>
+  </section>
+
+<!-- MISSION -->
+<section class="mission-section">
+  <div class="inner">
+    <p class="philosophy-en fade-in">MISSION</p>
+    <p class="philosophy-lead fade-in">{mission.lead}</p>
+    {mission.body.map((text) => (
+      <p class="philosophy-text fade-in">{text}</p>
+    ))}
+  </div>
+  <p class="philosophy-bg-text" aria-hidden="true">MISSION</p>
+</section>
+
+<!-- VISION -->
+<section class="vision-section">
+  <div class="inner">
+    <p class="philosophy-en fade-in">VISION</p>
+    <p class="philosophy-lead fade-in">{vision.lead}</p>
+    {vision.body.map((text) => (
+      <p class="philosophy-text fade-in">{text}</p>
+    ))}
+  </div>
+  <p class="philosophy-bg-text" aria-hidden="true">VISION</p>
+</section>
+
+  <!-- 代表メッセージ -->
+  <section class="message-section">
+    <div class="inner">
+      <div class="fade-in">
+        <SectionTitle titleJa="代表メッセージ" titleEn="MESSAGE" />
+      </div>
+      <div class="message-content fade-in">
+        <figure class="message-image">
+          <Image
+            src={memberYAMANAKA}
+            alt="代表取締役 山中美樹"
+            widths={[320, 640]}
+            sizes="(max-width: 768px) 100vw, 320px"
+            loading="lazy"
+          />
+        </figure>
+        <div class="message-body">
+          <p class="message-name-en">Representative Director</p>
+          <p class="message-name">山中 美樹</p>
+          <div class="message-divider" aria-hidden="true"></div>
+          <p class="message-text">
+            大学卒業後、海外での生活やビジネス経験を経て、営業・人材育成・マーケティングの分野に携わる。これまでに現場での営業活動から組織マネジメントまでを経験し、個人の成長が成果に直結する環境づくりに注力してまいりました。
+          </p>
+          <p class="message-text">
+            「自分の力で人生を選べる人を増やす」ことを理念に、未経験からでも挑戦できる環境づくりと、実践を通じた成長機会の提供を行っています。日本にとどまらず、世界で通用する人材を育てる。それが、Universeの目指す未来です。そして、その実現に向けて日々挑戦を続けています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- メンバー紹介 -->
+  <section class="member-section">
+    <div class="inner">
+      <div class="fade-in">
+        <SectionTitle titleJa="メンバー紹介" titleEn="MEMBER" />
+      </div>
+      <ul class="member-list">
+        {members.map((member, i) => (
+          <li class="member-card fade-in" style={`--delay: ${i * 0.1}s`}>
+            <figure class="member-image">
+              <Image
+                src={member.image}
+                alt={member.name}
+                widths={[320, 640]}
+                sizes="(max-width: 768px) 100vw, 320px"
+                loading="lazy"
+              />
+            </figure>
+            <div class="member-body">
+              <span class="member-role">{member.role}</span>
+              <p class="member-name">{member.name}</p>
+              <p class="member-name-en">{member.nameEn}</p>
+              <div class="member-divider" aria-hidden="true"></div>
+              <p class="member-comment">{member.comment}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 会社概要 -->
+  <section class="company-section">
+    <div class="inner">
+      <div class="fade-in">
+        <SectionTitle titleJa="会社概要" titleEn="COMPANY" />
+      </div>
+      <dl class="company-table fade-in">
+        {companyInfo.map((item) => (
+          <div class="company-row">
+            <dt class="company-term">{item.label}</dt>
+            <dd class="company-desc">{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .about-header {
+  padding: 120px 0 100px;
+
+  @include sp {
+    padding: 80px 0 64px;
+  }
+}
+
+.about-header-sub {
+  margin-top: 48px;
+  font-size: $font-size-sm;
+  letter-spacing: 0.08em;
+  color: rgba($color-primary, 0.5);
+  line-height: 1.9;
+
+  @include sp {
+    margin-top: 32px;
+    font-size: $font-size-xs;
+  }
+}
+
+.about-header-lead {
+  margin-top: 20px;
+  font-size: $font-size-xl;
+  font-weight: 500;
+  color: $color-primary;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+
+  @include sp {
+    font-size: $font-size-lg;
+  }
+}
+
+.br-pc {
+  @include sp {
+    display: none;
+  }
+}
+
+// ── MISSION ────────────────────────────────────────────────
+
+.mission-section {
+  position: relative;
+  padding: 100px 0 120px;
+  background: #0c0c0c;
+  overflow: hidden;
+
+  @include sp {
+    padding: 64px 0 80px;
+  }
+}
+
+// ── VISION ─────────────────────────────────────────────────
+
+.vision-section {
+  position: relative;
+  padding: 100px 0 120px;
+  background: #111;
+  overflow: hidden;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.05);
+
+  @include sp {
+    padding: 64px 0 80px;
+  }
+}
+
+// ── 共通（MISSION / VISION） ───────────────────────────────
+
+.philosophy-bg-text {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  font-size: 14rem;
+  font-weight: 500;
+  color: rgba($color-accent, 0.04);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+
+  @include sp {
+    font-size: 6rem;
+    right: -10px;
+  }
+}
+
+.philosophy-en {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: $font-size-xs;
+  letter-spacing: 0.3em;
+  color: $color-accent;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 0.5px;
+    background: $color-accent;
+  }
+}
+
+.philosophy-lead {
+  margin-top: 24px;
+  font-size: $font-size-xl;
+  font-weight: 500;
+  color: $color-text-light;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  max-width: 640px;
+
+  @include sp {
+    font-size: $font-size-lg;
+  }
+}
+
+.philosophy-text {
+  margin-top: 20px;
+  max-width: 640px;
+  font-size: $font-size-sm;
+  line-height: 2.1;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.4);
+
+  @include sp {
+    font-size: $font-size-xs;
+  }
+}
+
+  // ── 代表メッセージ ──────────────────────────────────────────
+
+  .message-section {
+    padding: 100px 0 120px;
+    background: $color-bg;
+
+    @include sp {
+      padding: 64px 0 80px;
+    }
+  }
+
+  .message-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 48px;
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .message-image {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+      @include sp {
+        display: none;
+      }
+
+    @include sp {
+      width: 200px;
+      margin: 0 auto;
+    }
+  }
+
+  .message-name-en {
+    font-size: $font-size-xs;
+    letter-spacing: 0.2em;
+    color: $color-accent;
+  }
+
+  .message-name {
+    margin-top: 6px;
+    font-size: $font-size-xl;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: $color-primary;
+  }
+
+  .message-divider {
+    width: 32px;
+    height: 1px;
+    background: $color-accent;
+    margin-top: 16px;
+  }
+
+  .message-text {
+    margin-top: 20px;
+    font-size: $font-size-sm;
+    line-height: 2;
+    letter-spacing: 0.06em;
+    color: rgba($color-primary, 0.7);
+  }
+
+  // ── メンバー紹介 ────────────────────────────────────────────
+
+  .member-section {
+    padding: 100px 0 120px;
+    background: $color-bg-alt;
+
+    @include sp {
+      padding: 64px 0 80px;
+    }
+  }
+
+  .member-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin-top: 48px;
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .member-card {
+    background: $color-bg;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 0.5px solid rgba($color-primary, 0.08);
+  }
+
+  .member-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+
+      .member-card:hover & {
+        transform: scale(1.03);
+      }
+
+      @include reduced-motion {
+        transition: none;
+
+        .member-card:hover & {
+          transform: none;
+        }
+      }
+    }
+  }
+
+  .member-body {
+    padding: 24px 20px 28px;
+  }
+
+  .member-role {
+    display: block;
+    font-size: $font-size-xs;
+    letter-spacing: 0.2em;
+    color: $color-accent;
+  }
+
+  .member-name {
+    margin-top: 6px;
+    font-size: $font-size-lg;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: $color-primary;
+  }
+
+  .member-name-en {
+    margin-top: 2px;
+    font-size: $font-size-xs;
+    letter-spacing: 0.1em;
+    color: rgba($color-primary, 0.35);
+  }
+
+  .member-divider {
+    width: 24px;
+    height: 1px;
+    background: $color-accent;
+    margin-top: 14px;
+  }
+
+  .member-comment {
+    margin-top: 14px;
+    font-size: $font-size-xs;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    color: rgba($color-primary, 0.6);
+  }
+
+  // ── 会社概要 ────────────────────────────────────────────────
+
+  .company-section {
+    padding: 100px 0 140px;
+    background: $color-bg;
+
+    @include sp {
+      padding: 64px 0 100px;
+    }
+  }
+
+  .company-table {
+    margin-top: 48px;
+  }
+
+  .company-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-top: 0.5px solid rgba($color-primary, 0.12);
+    align-items: start;
+
+    &:last-child {
+      border-bottom: 0.5px solid rgba($color-primary, 0.12);
+    }
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 16px 0;
+    }
+  }
+
+  .company-term {
+    font-size: $font-size-xs;
+    letter-spacing: 0.1em;
+    color: $color-accent;
+    padding-top: 2px;
+  }
+
+  .company-desc {
+    font-size: $font-size-sm;
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+    color: $color-primary;
+  }
+</style>
+
+<script>
+  const fadeTargets = document.querySelectorAll<HTMLElement>('.fade-in');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  fadeTargets.forEach((el) => {
+    const delay = el.style.getPropertyValue('--delay');
+    if (delay) {
+      el.style.transitionDelay = delay;
+    }
+    observer.observe(el);
+  });
+
+  // MISSION / VISION 背景テキストのパララックス
+const philosophyBgTexts = document.querySelectorAll<HTMLElement>('.philosophy-bg-text');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (philosophyBgTexts.length > 0 && !prefersReducedMotion) {
+  let bgTicking = false;
+
+  const updatePhilosophyBg = () => {
+    philosophyBgTexts.forEach((bgText) => {
+      const section = bgText.closest('section') as HTMLElement;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (rect.bottom >= 0 && rect.top <= windowHeight) {
+        const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+        const offset = (progress - 0.5) * 60;
+        bgText.style.transform = `translateY(calc(-50% + ${offset}px))`;
+      }
+    });
+
+    bgTicking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!bgTicking) {
+      requestAnimationFrame(updatePhilosophyBg);
+      bgTicking = true;
+    }
+  }, { passive: true });
+
+  updatePhilosophyBg();
+}
+</script>
 </BaseLayout>
 

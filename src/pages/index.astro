@@ -47,69 +47,80 @@ import contactImage from '../assets/images/photo14.jpg';
     </div>
   </section>
   <section class="section business">
-      <div class="header">
-        <div class="inner">
-          <div class="fade-in">
-            <SectionTitle titleJa="事業内容" titleEn="BUSINESS" />
+    <div class="inner">
+      <div class="fade-in">
+        <SectionTitle titleJa="事業内容" titleEn="BUSINESS" />
+      </div>
+      <div class="layout">
+        <div class="image-panel" aria-hidden="true">
+          <div class="image-slot">
+            <figure class="image-bg is-active" data-index="-1" >
+              <Image src={aboutImage} alt="" widths={[640, 960]} sizes="40vw" loading="lazy" />
+            </figure>
+            {businesses.map((business, index) => (
+              <figure class="image-bg" data-index={index}>
+                <Image src={business.image} alt="" widths={[640, 960]} sizes="40vw" loading="lazy" />
+              </figure>
+            ))}
+            <div class="image-overlay"></div>
+            <div class="image-caption" id="businessCaption">
+              <span class="caption-num" id="captionNum"></span>
+              <span class="caption-title" id="captionTitle"></span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="list">
-        {businesses.map((business, index) => (
-          <article class="item" data-index={index}>
-            <figure class="image-area">
-              <Image
-                src={business.image}
-                alt=""
-                widths={[768, 1280, 1920]}
-                sizes="100vw"
-              />
-            </figure>
-            <div class="content">
-              <span class="number" aria-hidden="true">{business.number}</span>
-              <div class="text-area">
-                <h3 class="title">
-                  <span class="title-ja">{business.titleJa}</span>
-                  <span class="title-en">{business.titleEn}</span>
-                </h3>
-                <p class="catchphrase">{business.catchphrase}</p>
-                <p class="description">{business.description}</p>
-              </div>
-              <a href={`/business#${business.id}`} class="view-more" data-astro-prefetch>
-                <span class="text">VIEW MORE</span>
-                <span class="line" aria-hidden="true"></span>
+        <ul class="list">
+          {businesses.map((business, index) => (
+            <li class="item fade-in" data-index={index}>
+              <a href={`/business#${business.id}`} class="link" data-astro-prefetch>
+                <span class="num" aria-hiddenh="true">{business.number}</span>
+                <div class="body">
+                  <div class="titles">
+                    <h3 class="title-ja">{business.titleJa}</h3>
+                    <span class="title-en">{business.titleEn}</span>
+                  </div>
+                  <p class="description">{business.description}</p>
+                </div>
+                <span class="arrow" aria-hidden="true">→</span>
               </a>
-            </div>
-          </article>
-        ))}
+            </li>
+          ))}
+        </ul>
       </div>
+    </div>
   </section>
   <section class="section recruit">
-    <figure class="image">
-      <Image src={recruitImage} alt="" widths={[768, 1280, 1920]} sizes="100vw" loading="lazy" />
-    </figure>
     <div class="inner">
       <div class="fade-in">
         <SectionTitle titleJa="採用情報" titleEn="RECRUIT" />
       </div>
-      <p class="lead fade-in">成長する自分に出会える場所。</p>
-      <p class="body fade-in">未経験からでも、独自の育成カリキュラムとメンター制度で着実にステップアップア。<br />「自分で考えて動ける人材」へ——あなたの挑戦を、全力で支えます。</p>
-      <a href="/recruit" class="view-more fade-in" data-astro-preftch>
-        <span class="text">VIEW MORE</span>
-        <span class="line" aria-hidden="true"></span>
-      </a>
+      <div class="recruit-card fade-in">
+        <div class="recruit-card-main">
+          <p class="recruit-catch">成長する自分に、出会える場所。</p>
+          <p class="recruit-desc">未経験からでも、独自のカリキュラムとメンター制度で着実にステップアップ。<br />あなたの挑戦を、全力で支えます。</p>
+        </div>
+        <div class="recruit-card-foot">
+          <a href="/recruit" class="recruit-link" data-astro-prefetch>
+            <span class="recruit-link-line" aria-hidden="true"></span>
+            <span class="recruit-link-text">VIEW MORE</span>
+            <span class="recruit-link-line" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
+  
   <section class="section contact">
-    <figure class="image">
-      <Image src={contactImage} alt="" widths={[768, 1280, 1920]} sizes="100vw" loading="lazy" />
-    </figure>
     <div class="inner">
       <div class="fade-in">
         <SectionTitle titleJa="お問い合わせ" titleEn="CONTACT" />
       </div>
-      <p class="lead fade-in">ご質問・ご相談はお気軽にどうぞ。</p>
-      <a href="/contact" class="button fade-in" data-astro-prefetch>お問い合わせはこちら</a>
+      <div class="contact-card fade-in">
+        <div class="contact-card-body">
+          <p class="contact-desc">ご質問・ご相談はお気軽にどうぞ。<br />まずはお気軽にご連絡ください。</p>
+          <a href="/contact" class="contact-button" data-astro-prefetch>お問い合わせはこちら</a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -403,46 +414,56 @@ import contactImage from '../assets/images/photo14.jpg';
     transition-delay: 0.3s;
   }
 
-// business
 
 // business
 
-// business
 
 .business {
-  position: relative;
+  padding: 80px 0 120px;
   background: $color-bg-alt;
-}
-
-.business .header {
-  padding: 80px 0 20px;
 
   @include sp {
-    padding: 60px 0 20px;
+    padding: 60px 0 80px;
   }
 }
 
-.business .list {
-  display: flex;
-  flex-direction: column;
+.business .layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+  margin-top: 40px;
+
+  @include sp {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }
 
-.business .item {
+.business .image-panel {
+  position: sticky;
+  top: 120px;
+
+  @include sp {
+    display: none;
+  }
+}
+
+.business .image-slot {
   position: relative;
-  height: 480px;
-  color: #fff;
-
-  @include sp {
-    height: 400px;
-  }
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 5px;
+  overflow: hidden;
+  background: $color-bg;
 }
 
-/* 画像（背景として敷く） */
-.business .image-area {
+.business .image-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  overflow: hidden;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 
   img {
     display: block;
@@ -451,307 +472,349 @@ import contactImage from '../assets/images/photo14.jpg';
     object-fit: cover;
   }
 
-  &::after {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    content: '';
+  &.is-active {
+    opacity: 1;
+  }
+
+  @include reduced-motion {
+    transition: none;
   }
 }
 
-/* テキストコンテンツ */
-.business .content {
-  position: relative;
-  z-index: $z-base;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 100%;
-  max-width: $container-width;
-  margin: 0 auto;
-  padding: 20px 20px;
-
-  @include sp {
-    padding: 24px 20px;
-  }
-}
-
-.business .number {
+.business .image-overlay {
   position: absolute;
-  top: 40px;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.business .image-caption {
+  position: absolute;
+  bottom: 20px;
   left: 20px;
-  font-size: $font-size-3xl;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: $color-accent;
-  line-height: 1;
-
-  @include sp {
-    top: 20px;
-  }
-}
-
-.business .text-area {
-  max-width: 600px;
-}
-
-.business .title {
-  display: flex;
+  right: 20px;
+  z-index: $z-base;display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease, transform 0.35s wase;
+  pointer-events: none;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include reduced-motion {
+    transition: none;
+    transform: none;
+  }
 }
 
-.business .title-ja {
-  font-size: $font-size-xl;
+.business .caption-num {
+  font-size: $font-size-xs;
   font-weight: 500;
-  letter-spacing: 0.05em;
-}
-
-.business .title-en {
-  font-size: $font-size-label;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.business .catchphrase {
-  margin-top: 16px;
-  font-size: $font-size-lg;
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0.05em;
-}
-
-.business .description {
-  margin-top: 12px;
-  line-height: 1.9;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.business .view-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 24px;
+  letter-spacing: 0.15em;
   color: $color-accent;
-  transition: transform 0.3s ease;
+}
 
-  .text {
-    font-size: $font-size-xs;
-    letter-spacing: 0.2em;
-    font-weight: 500;
-  }
+.business .caption-title {
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $color-text-light;
+  letter-spacing: 0.05em;
+}
 
-  .line {
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: $color-accent;
-    transition: width 0.3s ease;
+.business .list {
+  list-style: none;
+  padding: 0;
+}
+
+.business .item {
+  border-top: 0.5px solid rgba($color-primary, 0.15);
+
+  &:last-child {
+    border-bottom: 0.5px solid rgba($color-primary, 0.15);
   }
+}
+
+.business .link {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 12px;
+  border-radius: 4px;
+  transition: background 0.25s ease;
 
   &:hover {
-    transform: translateX(5px);
+    background: rgba($color-primary, 0.04);
 
-    .line {
-      width: 60px;
+    .num {
+      color: $color-accent;
+    }
+
+    .arrow {
+      color: $color-accent;transform: translateY(4px);
     }
   }
 
   @include reduced-motion {
     transition: none;
 
-    .line {
-      transition: none;
-    }
-
-    &:hover {
+    &:hover .business .arrow {
       transform: none;
-
-      .line {
-        width: 40px;
-      }
     }
   }
-}
-
-// recruit
-
-.recruit {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 120px 0;
-  color: $color-text-light;
-  overflow: hidden;
 
   @include sp {
-    padding: 80px 0;
+    padding: 20px 8px;
+    gap: 12px;
   }
 }
 
-.recruit .image {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
+.business .num {
+  font-size: $font-size-3xl;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba($color-primary, 0.15);
+  line-height: 1;
+  flex-shrink: 0;
+  padding-top: 4px;
+  transition: color 0.25s ease;
+  min-width: 72px;
 
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  @include reduced-motion {
+    transition: none;
   }
 
-  &::after {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    content: '';
+  @include sp {
+    font-size: $font-size-xl;
+    min-width: 48px;
   }
 }
 
-.recruit .inner {
-  position: relative;
-  z-index: $z-base;
+.business .body {
+  flex: 1;
 }
 
-.recruit .lead {
-  margin-top: 24px;
+.business .titles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.business .title-ja {
   font-size: $font-size-lg;
   font-weight: 500;
-  line-height: 1.6;
   letter-spacing: 0.05em;
+  line-height: 1.4;
 
   @include sp {
     font-size: $font-size-base;
   }
 }
 
-.recruit .body {
-  margin-top: 16px;
-  line-height: 1.9;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.85);
+.business .title-en {
+  font-size: $font-size-xs;
+  letter-spacing: 0.2em;
+  color: $color-accent;
 }
 
-.recruit .view-more {
+.business .description {
+  margin-top: 10px;
+  font-size: $font-size-sm;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: rgba($color-primary, 0.6);
+}
+
+.business .arrow {
+  font-size: $font-size-base;
+  color: rgba($color-primary, 0.3);
+  flex-shrink: 0;
+  padding-top: 6px;
+  transition: color 0.25s ease, transform 0.25s ease;
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+
+// recruit
+
+// recruit
+
+.recruit {
+  padding: 100px 0 120px;
+  background: #0c0c0c;
+
+  @include sp {
+    padding: 60px 0 80px;
+  }
+
+  // SectionTitle の色をダーク背景用に上書き
+  :global(.title-ja) {
+    color: #fff;
+  }
+
+  :global(.title-en) {
+    color: rgba(255, 255, 255, 0.35);
+
+    &::before,
+    &::after {
+      background: rgba(255, 255, 255, 0.35);
+    }
+  }
+}
+
+.recruit-card {
+  margin-top: 32px;
+  border: 0.5px solid rgba(255, 255, 255, 0.07);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.recruit-card-main {
+  padding: 32px 32px 28px;
+
+  @include sp {
+    padding: 24px 20px;
+  }
+}
+
+.recruit-catch {
+  font-size: $font-size-xl;
+  font-weight: 500;
+  color: $color-text-light;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+
+  @include sp {
+    font-size: $font-size-lg;
+  }
+}
+
+.recruit-desc {
+  margin-top: 16px;
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+
+  @include sp {
+    font-size: $font-size-xs;
+  }
+}
+
+.recruit-card-foot {
+  border-top: 3px solid $color-accent;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: flex-end;
+
+  @include sp {
+    padding: 14px 20px;
+  }
+}
+
+.recruit-link {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 40px;
+  gap: 10px;
   color: $color-accent;
-  transition: transform 0.3s ease;
-
-  .text {
-    font-size: $font-size-xs;
-    letter-spacing: 0.2em;
-    font-weight: 500;
-  }
-
-  .line {
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: $color-accent;
-    transition: width 0.3s ease;
-  }
+  transition: gap 0.3s ease;
 
   &:hover {
-    transform: translateX(5px);
-
-    .line {
-      width: 60px;
-    }
+    gap: 16px;
   }
 
   @include reduced-motion {
     transition: none;
 
-    .line {
-      transition: none;
-    }
-
     &:hover {
-      transform: none;
-
-      .line {
-        width: 40px;
-      }
+      gap: 10px;
     }
   }
 }
 
-.recruit .fade-in:nth-child(2) { transition-delay: 0.1s; }
-.recruit .fade-in:nth-child(3) { transition-delay: 0.2s; }
-.recruit .fade-in:nth-child(4) { transition-delay: 0.3s; }
+.recruit-link-line {
+  display: block;
+  width: 24px;
+  height: 0.5px;
+  background: $color-accent;
+  transition: width 0.3s ease;
 
-//  contact
+  .recruit-link:hover & {
+    width: 36px;
+  }
 
+  @include reduced-motion {
+    transition: none;
+
+    .recruit-link:hover & {
+      width: 24px;
+    }
+  }
+}
+
+.recruit-link-text {
+  font-size: $font-size-xs;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+}
+
+// contact
 
 .contact {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 60vh;
-  padding: 120px 0;
-  color: $color-text-light;
-  overflow: hidden;
+  padding: 100px 0 120px;
+  background: #fafaf8;
 
   @include sp {
-    padding: 80px 0;
+    padding: 60px 0 80px;
   }
 }
 
-.contact .image {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.contact-card {
+  margin-top: 32px;
+  border: 0.5px solid rgba($color-primary, 0.12);
+  border-radius: 4px;
   overflow: hidden;
+}
 
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.contact-card-body {
+  padding: 28px 32px;
+  text-align: center;
 
-  &::after {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    content: '';
+  @include sp {
+    padding: 24px 20px;
   }
 }
 
-.contact .inner {
-  position: relative;
-  z-index: $z-base;
-}
-
-.contact .lead {
-  margin-top: 24px;
-  font-size: $font-size-base;
+.contact-desc {
+  font-size: $font-size-sm;
+  color: rgba($color-primary, 0.5);
   line-height: 1.9;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.06em;
 }
 
-.contact .button {
+.contact-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
-  padding: 16px 48px;
-  border: 1px solid $color-accent;border-radius: 50px;
-  color: $color-accent;
-  font-size: $font-size-sm;
-  letter-spacing: 0.2em;
+  margin-top: 24px;
+  padding: 12px 40px;
+  border: 0.5px solid $color-primary;
+  border-radius: 50px;
+  color: $color-primary;
+  font-size: $font-size-xs;
+  letter-spacing: 0.25em;
   transition: background 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background: $color-accent;
-    color: $color-text;
+    background: $color-primary;
+    color: $color-text-light;
   }
 
   @include reduced-motion {
@@ -759,19 +822,12 @@ import contactImage from '../assets/images/photo14.jpg';
   }
 
   @include sp {
-    padding: 14px 36px;
+    padding: 11px 32px;
   }
 }
-
-.contact .fade-in:nth-child(2) { transition-delay: 0.1s; }
-.contact .fade-in:nth-child(3) { transition-delay: 0.2s; }
-
-
 </style>
 
 <script>
-import { actions } from "astro:actions";
-
   const heroTitle = document.getElementById('heroTitle');
 
   const triggerAnimation = () => {
@@ -870,5 +926,38 @@ import { actions } from "astro:actions";
     });
 
     updateParallax();
+  }
+
+  const businessItems = document.querySelectorAll<HTMLElement>('.business .item');
+  const imageBgs = document.querySelectorAll<HTMLElement>('.business .image-bg');
+  const caption = document.getElementById('businessCaption');
+  const captionNum = document.getElementById('captionNum');
+  const captionTitle = document.getElementById('captionTitle');
+
+  if (businessItems.length > 0 && imageBgs.length > 0) {
+    const showDefault = () => {
+      imageBgs.forEach((bg) => {
+        bg.classList.toggle('is-active', bg.dataset.index === '-1');
+      });
+      caption?.classList.remove('is-visible');
+    };
+
+    const showBusiness = (index: number, titleJa: string, number: string) => {
+      imageBgs.forEach((bg) => {
+        bg.classList.toggle('is-active', Number(bg.dataset.index) === index);
+      });
+      if (captionNum) captionNum.textContent = number;
+      if (captionTitle) captionTitle.textContent = titleJa;
+      caption?.classList.add('is-visible');
+    };
+
+    businessItems.forEach((item) => {
+      const index = Number(item.dataset.index);
+      const titleJa = item.querySelector<HTMLElement>('.business .title-ja')?.textContent ?? '';
+      const number = item.querySelector<HTMLElement>('.business .num')?.textContent ?? '';
+
+        item.addEventListener('mouseenter', () => showBusiness(index, titleJa, number));
+        item.addEventListener('mouseleave', showDefault);
+    });
   }
 </script>

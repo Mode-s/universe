@@ -1,9 +1,531 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeading from '../components/PageHeading.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { Image } from 'astro:assets';
+import recruitImage from '../assets/images/photo14.jpg';
 
+const appeals = [
+  {
+    number: '01',
+    title: '未経験歓迎',
+    text: '学歴・年齢・経験は一切不問。独自の段階的カリキュラムとメンター制度で、ゼロから着実にスキルを積み上げることができます。',
+  },
+  {
+    number: '02',
+    title: 'メンター制度',
+    text: '1対1のメンターが入社直後からサポート。ロープレ・OJT・定期面談を通じて、自分で考えて動ける人材へと成長できる環境があります。',
+  },
+  {
+    number: '03',
+    title: '実力主義の評価',
+    text: '年齢・経験年数に関係なく、成果と成長を正当に評価します。インセンティブ・昇給・キャリアアップの機会が明確に用意されています。',
+  },
+  {
+    number: '04',
+    title: '独立支援制度',
+    text: '将来的な独立・起業を目指す方もサポート。実践的な営業・マネジメント経験を積みながら、自分の力で人生を切り拓く力を身につけられます。',
+  },
+];
+
+const requirements = [
+  { label: '職種', value: '営業 / コンサルティング / マーケティング' },
+  { label: '業務内容', value: '営業活動（対面・電話）を中心に、お客様への提案や課題解決を行います。経験やスキルに応じて、人材育成・マネジメント・マーケティング業務にも携わっていただきます。' },
+  { label: '雇用形態', value: '正社員 / アルバイト / 業務委託' },
+  { label: '応募資格', value: '学歴・年齢・経験不問。未経験歓迎。やる気・成長意欲を重視します。' },
+  { label: '給与', value: '月給25万円〜（経験・能力を考慮の上、決定）\n※成果に応じてインセンティブあり\n※キャリアアップに応じて昇給あり\n※業務委託の場合は別途ご相談' },
+  { label: '勤務時間', value: '10:00〜19:00（休憩あり）\n※配属先や業務内容により変動あり' },
+  { label: '勤務地', value: '大阪府内（プロジェクト先により異なる）' },
+  { label: '休日・休暇', value: '週休2日制（シフト制）\nGW・夏季・年末年始休暇あり' },
+  { label: '福利厚生', value: '研修制度あり（未経験でも安心）/ インセンティブ制度 / キャリアアップ制度 / 独立支援制度あり' },
+];
+
+const steps = [
+  { number: 'STEP 1', label: 'エントリー', note: 'お問い合わせページからご連絡ください' },
+  { number: 'STEP 2', label: '書類選考', note: '3営業日以内にご連絡いたします' },
+  { number: 'STEP 3', label: '面接', note: 'オンライン・対面どちらも対応可' },
+  { number: 'STEP 4', label: '内定・入社', note: '入社日はご相談の上、決定します' },
+];
 ---
 
-<BaseLayout title="株式会社Universe | RECRUIT" description="ページ説明">
-  <PageHeading titleEN="RECRUIT" titleJa="採用情報" slot="hero" />
+<BaseLayout
+  title="採用情報 | 株式会社Universe"
+  description="株式会社Universeの採用情報ページです。未経験歓迎・成長環境・メンター制度など、Universeで働く魅力をご紹介します。"
+>
+  <section class="recruit-page">
+
+    <!-- ページヘッダー -->
+    <div class="recruit-header inner">
+      <div class="fade-in">
+        <SectionTitle titleJa="採用情報" titleEn="RECRUIT" />
+      </div>
+      <p class="recruit-header-lead fade-in">
+        成長する自分に、出会える場所。
+      </p>
+      <p class="recruit-header-text fade-in">
+        未経験からでも挑戦できる環境と、実践を通じた成長機会を提供しています。<br class="br-pc" />
+        あなたの「やりたい」を、ここで形にしてください。
+      </p>
+    </div>
+
+    <!-- 画像 -->
+    <figure class="recruit-hero-image fade-in">
+      <Image
+        src={recruitImage}
+        alt=""
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+        loading="eager"
+      />
+    </figure>
+
+    <!-- 魅力セクション -->
+    <section class="appeal-section">
+      <div class="inner">
+        <div class="fade-in">
+          <SectionTitle titleJa="Universeで働く魅力" titleEn="APPEAL" />
+        </div>
+        <ul class="appeal-list">
+          {appeals.map((item, i) => (
+            <li class="appeal-item fade-in" style={`--delay: ${i * 0.1}s`}>
+              <div class="appeal-item-header">
+                <span class="appeal-num">{item.number}</span>
+                <h3 class="appeal-title">{item.title}</h3>
+              </div>
+              <p class="appeal-text">{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- 募集要項 -->
+    <section class="requirements-section">
+      <div class="inner">
+        <div class="fade-in">
+          <SectionTitle titleJa="募集要項" titleEn="REQUIREMENTS" />
+        </div>
+        <dl class="requirements-table fade-in">
+          {requirements.map((item) => (
+            <div class="requirements-row">
+              <dt class="requirements-term">{item.label}</dt>
+              <dd class="requirements-desc">
+                {item.value.split('\n').map((line, i) => (
+                  <>
+                    {i > 0 && <br />}
+                    {line}
+                  </>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- 応募の流れ -->
+    <section class="flow-section">
+      <div class="inner">
+        <div class="fade-in">
+          <SectionTitle titleJa="応募の流れ" titleEn="FLOW" />
+        </div>
+        <ol class="flow-list">
+          {steps.map((step, i) => (
+            <li class="flow-item fade-in" style={`--delay: ${i * 0.1}s`}>
+              <div class="flow-item-inner">
+                <span class="flow-num">{step.number}</span>
+                <div class="flow-body">
+                  <p class="flow-label">{step.label}</p>
+                  <p class="flow-note">{step.note}</p>
+                </div>
+              </div>
+              {i < steps.length - 1 && (
+                <span class="flow-arrow" aria-hidden="true">↓</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="recruit-cta-section">
+      <div class="inner">
+        <div class="recruit-cta-card fade-in">
+          <p class="recruit-cta-lead">まずはお気軽にご連絡ください。</p>
+          <p class="recruit-cta-text">
+            ご質問・ご相談だけでも構いません。<br />
+            お名前（ふりがな）と連絡先をご記入の上、お問い合わせください。
+          </p>
+          <a href="/contact" class="recruit-cta-btn" data-astro-prefetch>
+            応募する・相談する
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </section>
 </BaseLayout>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .br-pc {
+    @include sp {
+      display: none;
+    }
+  }
+
+  // ── ページヘッダー ──────────────────────────────────────────
+
+  .recruit-header {
+    padding-top: 120px;
+    padding-bottom: 56px;
+
+    @include sp {
+      padding-top: 80px;
+      padding-bottom: 40px;
+    }
+  }
+
+  .recruit-header-lead {
+    margin-top: 40px;
+    font-size: $font-size-xl;
+    font-weight: 500;
+    color: $color-primary;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+
+    @include sp {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .recruit-header-text {
+    margin-top: 16px;
+    font-size: $font-size-sm;
+    color: rgba($color-primary, 0.6);
+    line-height: 1.9;
+    letter-spacing: 0.06em;
+
+    @include sp {
+      font-size: $font-size-xs;
+    }
+  }
+
+  // ── ヒーロー画像 ────────────────────────────────────────────
+
+  .recruit-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 5;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @include sp {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  // ── 魅力 ────────────────────────────────────────────────────
+
+  .appeal-section {
+    padding: 100px 0 120px;
+    background: $color-bg;
+
+    @include sp {
+      padding: 64px 0 80px;
+    }
+  }
+
+  .appeal-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    list-style: none;
+    padding: 0;
+    margin-top: 48px;
+    border: 0.5px solid rgba($color-primary, 0.12);
+
+    @include sp {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .appeal-item {
+    padding: 32px 28px;
+    background: $color-bg;
+    border: 0.5px solid rgba($color-primary, 0.12);
+    transition: background 0.25s ease;
+
+    &:hover {
+      background: $color-bg-alt;
+    }
+
+    @include reduced-motion {
+      transition: none;
+    }
+
+    @include sp {
+      padding: 24px 20px;
+    }
+  }
+
+  .appeal-item-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .appeal-num {
+    font-size: $font-size-xs;
+    letter-spacing: 0.15em;
+    color: $color-accent;
+    flex-shrink: 0;
+  }
+
+  .appeal-title {
+    font-size: $font-size-base;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: $color-primary;
+  }
+
+  .appeal-text {
+    margin-top: 14px;
+    font-size: $font-size-sm;
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+    color: rgba($color-primary, 0.6);
+
+    @include sp {
+      font-size: $font-size-xs;
+    }
+  }
+
+  // ── 募集要項 ────────────────────────────────────────────────
+
+  .requirements-section {
+    padding: 100px 0 120px;
+    background: $color-bg-alt;
+
+    @include sp {
+      padding: 64px 0 80px;
+    }
+  }
+
+  .requirements-table {
+    margin-top: 48px;
+  }
+
+  .requirements-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 0.5px solid rgba($color-primary, 0.12);
+    align-items: start;
+
+    &:last-child {
+      border-bottom: 0.5px solid rgba($color-primary, 0.12);
+    }
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 18px 0;
+    }
+  }
+
+  .requirements-term {
+    font-size: $font-size-xs;
+    letter-spacing: 0.1em;
+    color: $color-accent;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .requirements-desc {
+    font-size: $font-size-sm;
+    line-height: 2;
+    letter-spacing: 0.05em;
+    color: $color-primary;
+
+    @include sp {
+      font-size: $font-size-xs;
+    }
+  }
+
+  // ── 応募の流れ ──────────────────────────────────────────────
+
+  .flow-section {
+    padding: 100px 0 120px;
+    background: $color-bg;
+
+    @include sp {
+      padding: 64px 0 80px;
+    }
+  }
+
+  .flow-list {
+    list-style: none;
+    padding: 0;
+    margin: 48px auto;
+    max-width: 640px;
+  }
+
+  .flow-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flow-item-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    padding: 24px 28px;
+    background: $color-bg-alt;
+    border: 0.5px solid rgba($color-primary, 0.12);
+    border-radius: 4px;
+
+    @include sp {
+      gap: 16px;
+      padding: 18px 20px;
+    }
+  }
+
+  .flow-num {
+    font-size: $font-size-xs;
+    letter-spacing: 0.15em;
+    color: $color-accent;
+    flex-shrink: 0;
+    min-width: 60px;
+  }
+
+  .flow-body {
+    flex: 1;
+  }
+
+  .flow-label {
+    font-size: $font-size-base;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: $color-primary;
+
+    @include sp {
+      font-size: $font-size-sm;
+    }
+  }
+
+  .flow-note {
+    margin-top: 4px;
+    font-size: $font-size-xs;
+    color: rgba($color-primary, 0.5);
+    letter-spacing: 0.05em;
+  }
+
+  .flow-arrow {
+    display: block;
+    margin: 6px auto 6px;
+    font-size: $font-size-base;
+    color: $color-accent;
+    opacity: 0.4;
+  }
+
+  // ── CTA ─────────────────────────────────────────────────────
+
+  .recruit-cta-section {
+    padding: 0 0 140px;
+    background: $color-bg;
+
+    @include sp {
+      padding: 0 0 100px;
+    }
+  }
+
+  .recruit-cta-card {
+    padding: 56px 48px;
+    background: #0c0c0c;
+    border-radius: 4px;
+    text-align: center;
+
+    @include sp {
+      padding: 40px 24px;
+    }
+  }
+
+  .recruit-cta-lead {
+    font-size: $font-size-xl;
+    font-weight: 500;
+    color: $color-text-light;
+    letter-spacing: 0.05em;
+
+    @include sp {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .recruit-cta-text {
+    margin-top: 16px;
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.9;
+    letter-spacing: 0.06em;
+
+    @include sp {
+      font-size: $font-size-xs;
+    }
+  }
+
+  .recruit-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    padding: 16px 56px;
+    border: 0.5px solid $color-accent;
+    color: $color-accent;
+    font-size: $font-size-xs;
+    letter-spacing: 0.25em;
+    transition: background 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background: $color-accent;
+      color: $color-text;
+    }
+
+    @include reduced-motion {
+      transition: none;
+    }
+
+    @include sp {
+      padding: 14px 40px;
+    }
+  }
+</style>
+
+<script>
+  const fadeTargets = document.querySelectorAll<HTMLElement>('.fade-in');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  fadeTargets.forEach((el) => {
+    const delay = el.style.getPropertyValue('--delay');
+    if (delay) el.style.transitionDelay = delay;
+    observer.observe(el);
+  });
+</script>

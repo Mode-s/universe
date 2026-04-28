@@ -1,8 +1,14 @@
 ---
 import logoImage from '../assets/images/logo.png';
 import { navLinks } from '../data/navLinks';
+
+interface Props {
+  theme?: 'dark' | 'light';
+}
+
+const { theme = 'dark' } = Astro.props;
 ---
-<header class="header">
+<header class:list={['header', { 'header--light': theme === 'light' }]}>
   <div class="inner">
     <a href="/" class="logo" data-astro-prefetch>
       <div class="icon">
