@@ -170,138 +170,139 @@ const companyInfo = [
   @use '../styles/mixins' as *;
 
   .about-header {
-  padding: 120px 0 100px;
+    padding: 120px 0 100px;
+    background: $color-bg;
 
-  @include sp {
-    padding: 80px 0 64px;
+    @include sp {
+      padding: 80px 0 64px;
+    }
   }
-}
 
-.about-header-sub {
-  margin-top: 48px;
-  font-size: $font-size-sm;
-  letter-spacing: 0.08em;
-  color: rgba($color-primary, 0.5);
-  line-height: 1.9;
+  .about-header-sub {
+    margin-top: 48px;
+    font-size: $font-size-sm;
+    letter-spacing: 0.08em;
+    color: rgba($color-primary, 0.5);
+    line-height: 1.9;
 
-  @include sp {
-    margin-top: 32px;
-    font-size: $font-size-xs;
+    @include sp {
+      margin-top: 32px;
+      font-size: $font-size-xs;
+    }
   }
-}
 
-.about-header-lead {
-  margin-top: 20px;
-  font-size: $font-size-xl;
-  font-weight: 500;
-  color: $color-primary;
-  line-height: 1.8;
-  letter-spacing: 0.05em;
+  .about-header-lead {
+    margin-top: 20px;
+    font-size: $font-size-xl;
+    font-weight: 500;
+    color: $color-primary;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
 
-  @include sp {
-    font-size: $font-size-lg;
+    @include sp {
+      font-size: $font-size-lg;
+    }
   }
-}
 
-.br-pc {
-  @include sp {
-    display: none;
+  .br-pc {
+    @include sp {
+      display: none;
+    }
   }
-}
 
 // ── MISSION ────────────────────────────────────────────────
 
-.mission-section {
-  position: relative;
-  padding: 100px 0 120px;
-  background: #0c0c0c;
-  overflow: hidden;
+  .mission-section {
+    position: relative;
+    padding: 100px 0 120px;
+    background: #0c0c0c;
+    overflow: hidden;
 
-  @include sp {
-    padding: 64px 0 80px;
+    @include sp {
+      padding: 64px 0 80px;
+    }
   }
-}
 
 // ── VISION ─────────────────────────────────────────────────
 
-.vision-section {
-  position: relative;
-  padding: 100px 0 120px;
-  background: #111;
-  overflow: hidden;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.05);
+  .vision-section {
+    position: relative;
+    padding: 100px 0 120px;
+    background: #111;
+    overflow: hidden;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.05);
 
-  @include sp {
-    padding: 64px 0 80px;
+    @include sp {
+      padding: 64px 0 80px;
+    }
   }
-}
 
 // ── 共通（MISSION / VISION） ───────────────────────────────
 
-.philosophy-bg-text {
-  position: absolute;
-  top: 50%;
-  right: -20px;
-  transform: translateY(-50%);
-  font-size: 14rem;
-  font-weight: 500;
-  color: rgba($color-accent, 0.04);
-  letter-spacing: 0.05em;
-  line-height: 1;
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  will-change: transform;
+  .philosophy-bg-text {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    font-size: 14rem;
+    font-weight: 500;
+    color: rgba($color-accent, 0.04);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    will-change: transform;
 
-  @include sp {
-    font-size: 6rem;
-    right: -10px;
+    @include sp {
+      font-size: 6rem;
+      right: -10px;
+    }
   }
-}
 
-.philosophy-en {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: $font-size-xs;
-  letter-spacing: 0.3em;
-  color: $color-accent;
-
-  &::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 0.5px;
-    background: $color-accent;
-  }
-}
-
-.philosophy-lead {
-  margin-top: 24px;
-  font-size: $font-size-xl;
-  font-weight: 500;
-  color: $color-text-light;
-  line-height: 1.6;
-  letter-spacing: 0.05em;
-  max-width: 640px;
-
-  @include sp {
-    font-size: $font-size-lg;
-  }
-}
-
-.philosophy-text {
-  margin-top: 20px;
-  max-width: 640px;
-  font-size: $font-size-sm;
-  line-height: 2.1;
-  letter-spacing: 0.07em;
-  color: rgba(255, 255, 255, 0.4);
-
-  @include sp {
+  .philosophy-en {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-size: $font-size-xs;
+    letter-spacing: 0.3em;
+    color: $color-accent;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 0.5px;
+      background: $color-accent;
+    }
   }
-}
+
+  .philosophy-lead {
+    margin-top: 24px;
+    font-size: $font-size-xl;
+    font-weight: 500;
+    color: $color-text-light;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    max-width: 640px;
+
+    @include sp {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .philosophy-text {
+    margin-top: 20px;
+    max-width: 640px;
+    font-size: $font-size-sm;
+    line-height: 2.1;
+    letter-spacing: 0.07em;
+    color: rgba(255, 255, 255, 0.4);
+
+    @include sp {
+      font-size: $font-size-xs;
+    }
+  }
 
   // ── 代表メッセージ ──────────────────────────────────────────
 
@@ -382,7 +383,7 @@ const companyInfo = [
 
   .member-section {
     padding: 100px 0 120px;
-    background: $color-bg-alt;
+    background: $color-bg;
 
     @include sp {
       padding: 64px 0 80px;
@@ -405,9 +406,7 @@ const companyInfo = [
 
   .member-card {
     background: $color-bg;
-    border-radius: 4px;
     overflow: hidden;
-    border: 0.5px solid rgba($color-primary, 0.08);
   }
 
   .member-image {

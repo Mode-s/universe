@@ -57,6 +57,7 @@ import { businesses } from '../data/businesses';
 
   .business-page {
     padding: 120px 0 160px;
+    background: $color-bg;
 
     @include sp {
       padding: 80px 0 100px;
@@ -87,6 +88,7 @@ import { businesses } from '../data/businesses';
     top: 120px; // ヘッダー高さ + 余白
 
     @include sp {
+      display: none;
       position: static;
       border-bottom: 0.5px solid rgba($color-primary, 0.12);
     }
@@ -202,6 +204,13 @@ import { businesses } from '../data/businesses';
   .business-contents {
     position: relative;
     min-height: 400px;
+
+    .business-contents {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      min-height: 0;
+    }
   }
 
   .business-content {
@@ -212,6 +221,16 @@ import { businesses } from '../data/businesses';
       animation: contentFadeIn 0.4s ease forwards;
 
       @include reduced-motion {
+        animation: none;
+      }
+    }
+
+    @include sp {
+      display: block;
+      padding-bottom: 20px;
+      scroll-margin-top: 100px;
+
+      &.is-active {
         animation: none;
       }
     }
@@ -342,4 +361,19 @@ import { businesses } from '../data/businesses';
     const targetIndex = businesses.findIndex((b) => b.id === hash);
     if (targetIndex !== -1) switchBusiness(targetIndex);
   }
+
+  // src/pages/business.astro の <script> 末尾に追加
+
+const fadeTargets = document.querySelectorAll<HTMLElement>('.fade-in');
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+fadeTargets.forEach((el) => fadeObserver.observe(el));
 </script>

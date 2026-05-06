@@ -264,6 +264,7 @@ import contactImage from '../assets/images/photo14.jpg';
   .about {
     position: relative;
     padding: 120px 0;
+    background: $color-bg;
     overflow: hidden;
 
     @include sp {
@@ -423,7 +424,7 @@ import contactImage from '../assets/images/photo14.jpg';
 .business {
   position: relative;
   padding: 80px 0 120px;
-  background: $color-bg-alt;
+  background: $color-bg;
   overflow: hidden; 
 
   @include sp {
@@ -889,7 +890,7 @@ import contactImage from '../assets/images/photo14.jpg';
       const rect = section.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       if (rect.bottom < 0 || rect.top > windowHeight) return;
-      const offset = (rect.top + rect.height / 2 - windowHeight / 2) * 1.5;
+      const offset = (rect.top + rect.height / 2 - windowHeight / 2) * 0.25;
       bgText.style.transform = `translateY(${offset}px)`;
     });
     bgTicking = false;
