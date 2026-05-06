@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { Image } from 'astro:assets';
 import recruitImage from '../assets/images/photo14.jpg';
+import PhotoMarquee from '../components/PhotoMarquee.astro';
+import { marqueeImages } from '../data/marqueeimages';
 
 const appeals = [
   {
@@ -131,6 +133,7 @@ const steps = [
         </ol>
       </div>
     </section>
+    <PhotoMarquee images={marqueeImages} />
     <!-- CTA -->
     <section class="recruit-cta-section">
       <div class="inner">

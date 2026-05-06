@@ -5,8 +5,8 @@ import { Image } from 'astro:assets';
 import heroImage from '../assets/images/hero.jpg';
 import aboutImage from '../assets/images/photo14.jpg';
 import { businesses } from '../data/businesses';
-import recruitImage from '../assets/images/photo14.jpg';
-import contactImage from '../assets/images/photo14.jpg';
+import PhotoMarquee from '../components/PhotoMarquee.astro';
+import { marqueeImages } from '../data/marqueeimages';
 ---
 
 <BaseLayout title="株式会社Universe | TOP" description="株式会社Universeのトップページ">
@@ -90,6 +90,7 @@ import contactImage from '../assets/images/photo14.jpg';
       </div>
     </div>
   </section>
+  <PhotoMarquee images={marqueeImages} />
   <section class="section recruit">
     <div class="bg-text" aria-hidden="true">RECRUIT</div>
     <div class="inner">
