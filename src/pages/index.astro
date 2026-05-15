@@ -1,12 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import { Image } from 'astro:assets';
-import heroImage from '../assets/images/hero.jpg';
-import aboutImage from '../assets/images/photo14.jpg';
+
 import { businesses } from '../data/businesses';
 import PhotoMarquee from '../components/PhotoMarquee.astro';
 import { marqueeImages } from '../data/marqueeimages';
+
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/hero.jpg';
+import aboutImage from '../assets/images/photo14.jpg';
+import businessImage from '../assets/images/photo44.jpg'
 ---
 
 <BaseLayout title="株式会社Universe | TOP" description="株式会社Universeのトップページ">
@@ -56,7 +59,7 @@ import { marqueeImages } from '../data/marqueeimages';
         <div class="image-panel" aria-hidden="true">
           <div class="image-slot">
             <figure class="image-bg is-active" data-index="-1" >
-              <Image src={aboutImage} alt="" widths={[640, 960]} sizes="40vw" loading="lazy" />
+              <Image src={businessImage} alt="" widths={[640, 960]} sizes="40vw" loading="lazy" />
             </figure>
             {businesses.map((business, index) => (
               <figure class="image-bg" data-index={index}>
