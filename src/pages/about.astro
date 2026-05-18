@@ -3,7 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { Image } from 'astro:assets';
 
-import memberYAMANAKA from '../assets/images/YAMANAKA.png';
+import yamanaka from '../assets/images/photo18.jpg'
+import memberYAMANAKA from '../assets/images/Yamanaka2.png';
 import menberAYATO from '../assets/images/AYATO.png';
 import memberAKANE from '../assets/images/AKANE.png';
 
@@ -107,7 +108,7 @@ const companyInfo = [
       </div>
       <div class="message-content fade-in">
         <figure class="message-image">
-          <Image src={memberYAMANAKA} alt="代表取締役 山中美樹" widths={[320, 640]} sizes="(max-width: 768px) 100vw, 320px" loading="lazy" />
+          <Image src={yamanaka} alt="代表取締役 山中美樹" widths={[320, 640]} sizes="(max-width: 768px) 100vw, 320px" loading="lazy" />
         </figure>
         <div class="message-body">
           <p class="message-name-en">Representative Director</p>
@@ -410,8 +411,9 @@ const companyInfo = [
   }
 
   .member-image {
-    width: 100%;
+    width: 50%;
     aspect-ratio: 3 / 4;
+    margin: 0 auto;
     overflow: hidden;
 
     img {
