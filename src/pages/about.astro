@@ -3,29 +3,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { Image } from 'astro:assets';
 
-import yamanaka from '../assets/images/photo18.jpg'
+import yamanaka from '../assets/images/photo18.jpg';
 import memberYAMANAKA from '../assets/images/Yamanaka2.png';
 import menberAYATO from '../assets/images/AYATO.png';
 import memberAKANE from '../assets/images/AKANE.png';
+
+const about = {
+  en: 'ABOUT',
+  lead: '株式会社Universeは、一人ひとりが自分らしいキャリアを描き、自分の力で人生を選べる社会を目指しています。',
+  body: ['私たちは、', '「自分の力で人生を選べる人を増やす」', 'ことを理念に掲げています。', '未経験でも挑戦できる環境。', '実践を通して成長できるフィールド。', '互いに支え合い、高め合いながら、', '一人ひとりが可能性を広げられる場所をつくり続けます。'],
+};
 
 const mission = {
   en: 'MISSION',
   ja: 'ミッション',
   lead: '自分の力で人生を選べる人を、増やし続ける。',
-  body: [
-    '「選べる」という言葉には、力がある。自分の意志で仕事を選び、生き方を選び、未来を選ぶ。そんな当たり前のようで、多くの人にとって遠い現実を、私たちは変えていきたいと思っています。',
-    'Universeは、営業支援・人材育成・マーケティングを通じて、個人が「選択できる力」を身につける場所をつくります。未経験でも挑戦できる環境、実践で磨かれるスキル、成果が正当に評価される仕組み。一人ひとりが自分の力で道を切り拓けるよう、私たちはその土台をつくり続けます。',
-  ],
+  body: ['人生は、自分自身の意思で選び、創っていくもの。', '私たちは、挑戦するきっかけをつくり、成長し続けられる環境を育みます。', '人生を切り拓くのは、自分自身。', 'その挑戦を支え続けること。', 'それが、私たちの使命です。'],
 };
 
 const vision = {
   en: 'VISION',
   ja: 'ビジョン',
-  lead: '日本にとどまらず、世界で通用する人材が育つ社会へ。',
-  body: [
-    '世界は広い。日本の外に出れば、もっと多くの選択肢がある。言語の壁、文化の違い、商慣習のギャップ——そのすべてを乗り越えた先に、本当の「選択の自由」がある。',
-    '私たちが目指すのは、国境を越えて活躍できる人材が育つ組織。日本国内にとどまらず、世界のどのフィールドでも通用するビジネス力と人間力を持った人材を輩出すること。Universeという名のとおり、その可能性に限界はない。',
-  ],
+  lead: '一人ひとりが可能性を広げ続けられる社会へ。',
+  body: ['“人生を変えるのは、自分” と信じています。', 'だからこそ、', '挑戦する人が安心して一歩を踏み出せる環境を育み、', '人間力・挑戦する力・信頼される力を育てることで、', '一人ひとりが環境にとらわれることなく、', '自分らしく可能性を広げ続けられる社会を目指します。', '可能性に、国境はない。'],
+};
+
+const values = {
+  en: 'VALUES',
+  ja: 'バリューズ',
+  items: ['自ら選ぶ。', '挑戦を楽しむ。', '学び続ける。', '共に成長する。', '信頼を築く。'],
+  body: ['挑戦は、一人でもできる。', 'でも、応援し合える仲間がいることで、その一歩はもっと大きくなる。'],
 };
 
 const members = [
@@ -62,30 +69,21 @@ const companyInfo = [
 ---
 
 <BaseLayout title="株式会社Universe | ABOUT" description="株式会社Universeの企業理念・代表メッセージ・メンバー紹介・会社概要をご紹介します。">
-  <section class="about-header">
+  <!-- ABOUT -->
+  <section class="about-section">
     <div class="inner">
-      <div class="fade-in">
-        <SectionTitle titleJa="私たちについて" titleEn="ABOUT" />
-      </div>
-      <p class="about-header-sub fade-in">
-        株式会社Universeは、2026年に設立された<br class="br-pc" />
-        営業支援・人材育成を主軸とする会社です。
-      </p>
-      <p class="about-header-lead fade-in">
-        「自分の力で人生を選べる人を増やす」ことを理念に掲げ、<br class="br-pc" />
-        未経験からでも挑戦できる環境の中で、<br class="br-pc" />
-        実践を通じて成長できるフィールドを提供しています。
-      </p>
+      <p class="philosophy-en fade-in">ABOUT</p>
+      <p class="philosophy-lead fade-in">{about.lead}</p>
+      {about.body.map((text) => <p class="philosophy-text fade-in">{text}</p>)}
     </div>
+    <p class="philosophy-bg-text" aria-hidden="true">ABOUT</p>
   </section>
   <!-- MISSION -->
   <section class="mission-section">
     <div class="inner">
       <p class="philosophy-en fade-in">MISSION</p>
       <p class="philosophy-lead fade-in">{mission.lead}</p>
-      {mission.body.map((text) => (
-      <p class="philosophy-text fade-in">{text}</p>
-      ))}
+      {mission.body.map((text) => <p class="philosophy-text fade-in">{text}</p>)}
     </div>
     <p class="philosophy-bg-text" aria-hidden="true">MISSION</p>
   </section>
@@ -94,11 +92,18 @@ const companyInfo = [
     <div class="inner">
       <p class="philosophy-en fade-in">VISION</p>
       <p class="philosophy-lead fade-in">{vision.lead}</p>
-      {vision.body.map((text) => (
-        <p class="philosophy-text fade-in">{text}</p>
-      ))}
+      {vision.body.map((text) => <p class="philosophy-text fade-in">{text}</p>)}
     </div>
     <p class="philosophy-bg-text" aria-hidden="true">VISION</p>
+  </section>
+  <!-- VALUES -->
+  <section class="values-section">
+    <div class="inner">
+      <p class="philosophy-en fade-in">VALUES</p>
+      {values.items.map((text) => <p class="philosophy-lead fade-in">{text}</p>)}
+      {values.body.map((text) => <p class="philosophy-text fade-in">{text}</p>)}
+    </div>
+    <p class="philosophy-bg-text" aria-hidden="true">VALUES</p>
   </section>
   <!-- 代表メッセージ -->
   <section class="message-section">
@@ -114,12 +119,8 @@ const companyInfo = [
           <p class="message-name-en">Representative Director</p>
           <p class="message-name">山中 美樹</p>
           <div class="message-divider" aria-hidden="true"></div>
-          <p class="message-text">
-            大学卒業後、海外での生活やビジネス経験を経て、営業・人材育成・マーケティングの分野に携わる。これまでに現場での営業活動から組織マネジメントまでを経験し、個人の成長が成果に直結する環境づくりに注力してまいりました。
-          </p>
-          <p class="message-text">
-            「自分の力で人生を選べる人を増やす」ことを理念に、未経験からでも挑戦できる環境づくりと、実践を通じた成長機会の提供を行っています。日本にとどまらず、世界で通用する人材を育てる。それが、Universeの目指す未来です。そして、その実現に向けて日々挑戦を続けています。
-          </p>
+          <p class="message-text">大学卒業後、海外での生活やビジネス経験を経て、営業・人材育成・マーケティングの分野に携わる。これまでに現場での営業活動から組織マネジメントまでを経験し、個人の成長が成果に直結する環境づくりに注力してまいりました。</p>
+          <p class="message-text">「自分の力で人生を選べる人を増やす」ことを理念に、未経験からでも挑戦できる環境づくりと、実践を通じた成長機会の提供を行っています。日本にとどまらず、世界で通用する人材を育てる。それが、Universeの目指す未来です。そして、その実現に向けて日々挑戦を続けています。</p>
         </div>
       </div>
     </div>
@@ -131,20 +132,22 @@ const companyInfo = [
         <SectionTitle titleJa="メンバー紹介" titleEn="MEMBER" />
       </div>
       <ul class="member-list">
-        {members.map((member, i) => (
-          <li class="member-card fade-in" style={`--delay: ${i * 0.1}s`}>
-            <figure class="member-image">
-              <Image src={member.image} alt={member.name} widths={[320, 640]} sizes="(max-width: 768px) 100vw, 320px" loading="lazy" />
-            </figure>
-            <div class="member-body">
-              <span class="member-role">{member.role}</span>
-              <p class="member-name">{member.name}</p>
-              <p class="member-name-en">{member.nameEn}</p>
-              <div class="member-divider" aria-hidden="true"></div>
-              <p class="member-comment">{member.comment}</p>
-            </div>
-          </li>
-        ))}
+        {
+          members.map((member, i) => (
+            <li class="member-card fade-in" style={`--delay: ${i * 0.1}s`}>
+              <figure class="member-image">
+                <Image src={member.image} alt={member.name} widths={[320, 640]} sizes="(max-width: 768px) 100vw, 320px" loading="lazy" />
+              </figure>
+              <div class="member-body">
+                <span class="member-role">{member.role}</span>
+                <p class="member-name">{member.name}</p>
+                <p class="member-name-en">{member.nameEn}</p>
+                <div class="member-divider" aria-hidden="true" />
+                <p class="member-comment">{member.comment}</p>
+              </div>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </section>
@@ -155,12 +158,14 @@ const companyInfo = [
         <SectionTitle titleJa="会社概要" titleEn="COMPANY" />
       </div>
       <dl class="company-table fade-in">
-        {companyInfo.map((item) => (
-          <div class="company-row">
-            <dt class="company-term">{item.label}</dt>
-            <dd class="company-desc">{item.value}</dd>
-          </div>
-        ))}
+        {
+          companyInfo.map((item) => (
+            <div class="company-row">
+              <dt class="company-term">{item.label}</dt>
+              <dd class="company-desc">{item.value}</dd>
+            </div>
+          ))
+        }
       </dl>
     </div>
   </section>
@@ -170,61 +175,34 @@ const companyInfo = [
   @use '../styles/variables' as *;
   @use '../styles/mixins' as *;
 
-  .about-header {
-    padding: 120px 0 100px;
-    background: $color-bg;
+  // ── ABOUT ────────────────────────────────────────────────
+
+  .about-section {
+    position: relative;
+    padding: 120px 0 120px;
+    background: #111;
+    overflow: hidden;
 
     @include sp {
-      padding: 80px 0 64px;
+      padding: 80px 0 80px;
     }
   }
 
-  .about-header-sub {
-    margin-top: 48px;
-    font-size: $font-size-sm;
-    letter-spacing: 0.08em;
-    color: rgba($color-primary, 0.5);
-    line-height: 1.9;
-
-    @include sp {
-      margin-top: 32px;
-      font-size: $font-size-xs;
-    }
-  }
-
-  .about-header-lead {
-    margin-top: 20px;
-    font-size: $font-size-xl;
-    font-weight: 500;
-    color: $color-primary;
-    line-height: 1.8;
-    letter-spacing: 0.05em;
-
-    @include sp {
-      font-size: $font-size-lg;
-    }
-  }
-
-  .br-pc {
-    @include sp {
-      display: none;
-    }
-  }
-
-// ── MISSION ────────────────────────────────────────────────
+  // ── MISSION ────────────────────────────────────────────────
 
   .mission-section {
     position: relative;
     padding: 100px 0 120px;
     background: #0c0c0c;
     overflow: hidden;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.05);
 
     @include sp {
       padding: 64px 0 80px;
     }
   }
 
-// ── VISION ─────────────────────────────────────────────────
+  // ── VISION ─────────────────────────────────────────────────
 
   .vision-section {
     position: relative;
@@ -238,7 +216,29 @@ const companyInfo = [
     }
   }
 
-// ── 共通（MISSION / VISION） ───────────────────────────────
+  // ── VALUES ─────────────────────────────────────────────────
+
+  .values-section {
+    position: relative;
+    padding: 100px 0 120px;
+    background: #0c0c0c;
+    overflow: hidden;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.05);
+
+    @include sp {
+      padding: 64px 0 80px;
+    }
+
+    .philosophy-lead + .philosophy-lead {
+      margin-top: 12px;
+    }
+
+    .philosophy-text:first-of-type {
+      margin-top: 40px;
+    }
+  }
+
+  // ── 共通（ABOUT / MISSION / VISION / VALUES） ───────────────
 
   .philosophy-bg-text {
     position: absolute;
@@ -341,9 +341,9 @@ const companyInfo = [
       object-fit: cover;
     }
 
-      @include sp {
-        display: none;
-      }
+    @include sp {
+      display: none;
+    }
 
     @include sp {
       width: 200px;
@@ -530,14 +530,17 @@ const companyInfo = [
 <script>
   const fadeTargets = document.querySelectorAll<HTMLElement>('.fade-in');
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 },
+  );
 
   fadeTargets.forEach((el) => {
     const delay = el.style.getPropertyValue('--delay');
@@ -547,39 +550,42 @@ const companyInfo = [
     observer.observe(el);
   });
 
-  // MISSION / VISION 背景テキストのパララックス
-const philosophyBgTexts = document.querySelectorAll<HTMLElement>('.philosophy-bg-text');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ABOUT / MISSION / VISION / VALUES 背景テキストのパララックス
+  const philosophyBgTexts = document.querySelectorAll<HTMLElement>('.philosophy-bg-text');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if (philosophyBgTexts.length > 0 && !prefersReducedMotion) {
-  let bgTicking = false;
+  if (philosophyBgTexts.length > 0 && !prefersReducedMotion) {
+    let bgTicking = false;
 
-  const updatePhilosophyBg = () => {
-    philosophyBgTexts.forEach((bgText) => {
-      const section = bgText.closest('section') as HTMLElement;
-      if (!section) return;
+    const updatePhilosophyBg = () => {
+      philosophyBgTexts.forEach((bgText) => {
+        const section = bgText.closest('section') as HTMLElement;
+        if (!section) return;
 
-      const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
 
-      if (rect.bottom >= 0 && rect.top <= windowHeight) {
-        const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-        const offset = (progress - 0.5) * 60;
-        bgText.style.transform = `translateY(calc(-50% + ${offset}px))`;
-      }
-    });
+        if (rect.bottom >= 0 && rect.top <= windowHeight) {
+          const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+          const offset = (progress - 0.5) * 60;
+          bgText.style.transform = `translateY(calc(-50% + ${offset}px))`;
+        }
+      });
 
-    bgTicking = false;
-  };
+      bgTicking = false;
+    };
 
-  window.addEventListener('scroll', () => {
-    if (!bgTicking) {
-      requestAnimationFrame(updatePhilosophyBg);
-      bgTicking = true;
-    }
-  }, { passive: true });
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!bgTicking) {
+          requestAnimationFrame(updatePhilosophyBg);
+          bgTicking = true;
+        }
+      },
+      { passive: true },
+    );
 
-  updatePhilosophyBg();
-}
+    updatePhilosophyBg();
+  }
 </script>
-
